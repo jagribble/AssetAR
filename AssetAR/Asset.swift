@@ -9,9 +9,9 @@
 import Foundation
 
 class Asset{
-    var assetName = ""
-    var assetLocationX = 0.0
-    var assetLocationY = 0.0
+    private var assetName = ""
+    private var assetLocationX = 0.0
+    private var assetLocationY = 0.0
     
     init(name: String, x:Double, y:Double) {
         self.assetName = name
