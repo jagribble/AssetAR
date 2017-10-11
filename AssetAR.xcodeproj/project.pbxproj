@@ -15,6 +15,8 @@
 		0691F6F61F8E1D700029D5A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0691F6F41F8E1D700029D5A9 /* LaunchScreen.storyboard */; };
 		0691F7011F8E1D700029D5A9 /* AssetARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691F7001F8E1D700029D5A9 /* AssetARTests.swift */; };
 		0691F70C1F8E1D700029D5A9 /* AssetARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691F70B1F8E1D700029D5A9 /* AssetARUITests.swift */; };
+		0691F71C1F8E33B10029D5A9 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691F71B1F8E33B10029D5A9 /* Asset.swift */; };
+		0691F7211F8E70480029D5A9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0691F7201F8E70480029D5A9 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		0691F7071F8E1D700029D5A9 /* AssetARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssetARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0691F70B1F8E1D700029D5A9 /* AssetARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetARUITests.swift; sourceTree = "<group>"; };
 		0691F70D1F8E1D700029D5A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0691F7191F8E21350029D5A9 /* LogBook.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LogBook.md; sourceTree = "<group>"; };
+		0691F71A1F8E22210029D5A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0691F71B1F8E33B10029D5A9 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		0691F7201F8E70480029D5A9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0691F7211F8E70480029D5A9 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,10 +86,13 @@
 		0691F6DD1F8E1D700029D5A9 = {
 			isa = PBXGroup;
 			children = (
+				0691F7191F8E21350029D5A9 /* LogBook.md */,
+				0691F71A1F8E22210029D5A9 /* README.md */,
 				0691F6E81F8E1D700029D5A9 /* AssetAR */,
 				0691F6FF1F8E1D700029D5A9 /* AssetARTests */,
 				0691F70A1F8E1D700029D5A9 /* AssetARUITests */,
 				0691F6E71F8E1D700029D5A9 /* Products */,
+				0691F71D1F8E6FE10029D5A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +116,7 @@
 				0691F6F21F8E1D700029D5A9 /* Assets.xcassets */,
 				0691F6F41F8E1D700029D5A9 /* LaunchScreen.storyboard */,
 				0691F6F71F8E1D700029D5A9 /* Info.plist */,
+				0691F71B1F8E33B10029D5A9 /* Asset.swift */,
 			);
 			path = AssetAR;
 			sourceTree = "<group>";
@@ -126,6 +137,14 @@
 				0691F70D1F8E1D700029D5A9 /* Info.plist */,
 			);
 			path = AssetARUITests;
+			sourceTree = "<group>";
+		};
+		0691F71D1F8E6FE10029D5A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0691F7201F8E70480029D5A9 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +216,11 @@
 					0691F6E51F8E1D700029D5A9 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					0691F6FB1F8E1D700029D5A9 = {
 						CreatedOnToolsVersion = 9.0;
@@ -263,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0691F71C1F8E33B10029D5A9 /* Asset.swift in Sources */,
 				0691F6EE1F8E1D700029D5A9 /* ViewController.swift in Sources */,
 				0691F6EA1F8E1D700029D5A9 /* AppDelegate.swift in Sources */,
 			);
