@@ -11,12 +11,12 @@ import Foundation
 class Asset{
      var assetName = ""
     var assetLocationX:Float
-    var assetLocationY:Float
+    var assetLocationZ:Float
     
-    init(name: String, x:Float, y:Float) {
+    init(name: String, x:Float, z:Float) {
         self.assetName = name
         self.assetLocationX = x
-        self.assetLocationY = y
+        self.assetLocationZ = z
     }
     
 }
