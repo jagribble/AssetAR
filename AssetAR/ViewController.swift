@@ -60,29 +60,29 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         material.diffuse.contents = UIImage(named: "art.scnassets/pin.jpg")
         ballShape.materials = [material]
         let ballNode = SCNNode(geometry: ballShape)
-         //   ballNode.position = SCNVector3Make(1.329,0.3,0)
-            //work out the location relative to the point the device is
-            let asset1 = Asset(name: "Asset1", x: 51.451653, z: -0.951794)
-            let asset2 = Asset(name: "Asset2", x: 51.441431, z: -0.941817)
-            //51.451653, -0.951794
-        //https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2
-            // to get directions in gravity&Heading see https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873776-gravityandheading
-            
-            let ballNodeX:Float
-            let ballNodeZ:Float
-            // if the users longitude value is less than the x value for the asset then take the current location from the assets else do it the other way
-            if(Float(locValue.longitude) < asset2.assetLocationX){
-                ballNodeX = ((asset2.assetLocationX)-(Float(locValue.longitude) ))//East/West
-            } else{
-                ballNodeX = (Float(locValue.longitude)-(asset2.assetLocationX))//East/West
-            }
-            
-              // if the users longitude value is less than the z value for the asset then take the current location from the assets else do it the other way
-            if(Float(locValue.latitude) < asset2.assetLocationZ){
-                 ballNodeZ = ( (asset2.assetLocationZ)-(Float(locValue.latitude) ))//North/South
-            } else{
-                ballNodeZ = (Float(locValue.latitude)-(asset2.assetLocationZ))//North/South
-            }
+     
+        
+        let asset1 = Asset(name: "Asset1", x: 51.451653, z: -0.951794)
+        let asset2 = Asset(name: "Asset2", x: 51.441431, z: -0.941817)
+       //* work out the location relative to the point the device is
+       //https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2
+       // To get directions in gravity&Heading see https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873776-gravityandheading */
+        
+        let ballNodeX:Float
+        let ballNodeZ:Float
+        // if the users longitude value is less than the x value for the asset then take the current location from the assets else do it the other way
+        if(Float(locValue.longitude) < asset2.assetLocationX){
+            ballNodeX = ((asset2.assetLocationX)-(Float(locValue.longitude) ))//East/West
+        } else{
+            ballNodeX = (Float(locValue.longitude)-(asset2.assetLocationX))//East/West
+        }
+        
+          // if the users longitude value is less than the z value for the asset then take the current location from the assets else do it the other way
+        if(Float(locValue.latitude) < asset2.assetLocationZ){
+             ballNodeZ = ( (asset2.assetLocationZ)-(Float(locValue.latitude) ))//North/South
+        } else{
+            ballNodeZ = (Float(locValue.latitude)-(asset2.assetLocationZ))//North/South
+        }
        
         print("ballNodeX = \(ballNodeX),    ballNodeZ = \(ballNodeZ)")
         ballNode.position = SCNVector3Make(ballNodeX,0, ballNodeZ)
