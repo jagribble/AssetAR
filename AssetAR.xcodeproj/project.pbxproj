@@ -55,6 +55,7 @@
 		0691F71A1F8E22210029D5A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0691F71B1F8E33B10029D5A9 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		0691F7201F8E70480029D5A9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0691F7221F8ED60C0029D5A9 /* pin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pin.jpg; path = art.scnassets/pin.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				0691F6E91F8E1D700029D5A9 /* AppDelegate.swift */,
+				0691F7221F8ED60C0029D5A9 /* pin.jpg */,
 				0691F6EB1F8E1D700029D5A9 /* art.scnassets */,
 				0691F6ED1F8E1D700029D5A9 /* ViewController.swift */,
 				0691F6EF1F8E1D700029D5A9 /* Main.storyboard */,
