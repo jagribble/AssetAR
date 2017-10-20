@@ -7,3 +7,9 @@
 - Created a simple class for assets in swift to enable access of the data relating to one record.
 - Positiong ARKit in correct Heading
 - Working out how to position objects in relation to GPS location in AR View. [Link](https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2 ) to help
+### To do next week
+- Satrt work on API setting up connection with app
+
+## Week 3
+- Set up simple NodeJS server [project](https://github.com/jagribble/AssetServer)
+- Encountered eslint errors while trying to comply with ES6
