@@ -13,3 +13,11 @@
 ## Week 3
 - Set up simple NodeJS server [project](https://github.com/jagribble/AssetServer)
 - Encountered eslint errors while trying to comply with ES6
+### To do next week
+- Fix eslint Error 
+- Connect database to server
+- show connection from API to app
+
+## Week 4
+- Added Heroku Postgres database to staging application
+- Connected it to code and created a simple asset table 
