@@ -16,7 +16,34 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     var objectSet = false
     @IBOutlet var sceneView: ARSCNView!
     
+    /**
+     Function to get all assets
+     **/
+    func getAssets(){
+        // set up the request
+        let url = URL(string: "http://assetar-stg.herokuapp.com/selectAsset")
+        let session = URLSession(configuration: .ephemeral, delegate: nil, delegateQueue: OperationQueue.main)
+        let task = session.dataTask(with: url!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            guard let data = data else {
+                print("No data in url")
+                return
+            }
+            // when the repsonse is returned output response
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
+                print("Can not convert data to JSON object")
+                return
+            }
+            
+            print("----------------------------------")
+            print(json)
+            print("----------------------------------")
+        })
+        task.resume()
+        
+    }
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         // Set the view's delegate
@@ -53,8 +80,8 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if(!objectSet){
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        print("location data -> \(String(describing: manager.location))")
+       // print("locations = \(locValue.latitude) \(locValue.longitude)")
+       // print("location data -> \(String(describing: manager.location))")
         let ballShape = SCNSphere(radius: 1.19)
         let material = SCNMaterial()
         material.diffuse.contents = UIImage(named: "art.scnassets/pin.jpg")
@@ -94,12 +121,13 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         //detect planes and set the heading of the ARKit world to the heading of north
         configuration.planeDetection = .horizontal
         configuration.worldAlignment = .gravityAndHeading
-        
+        self.getAssets()
         // Run the view's session
         sceneView.session.run(configuration)
     }

@@ -20,4 +20,6 @@
 
 ## Week 4
 - Added Heroku Postgres database to staging application
-- Connected it to code and created a simple asset table 
+- Connected it to code and created a simple asset table
+- Created insert POST method
+- Made function on IOS app to get asset data `getAssets()` from `/selectAsset`
