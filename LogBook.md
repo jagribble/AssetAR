@@ -1,4 +1,5 @@
 #  Jules Gribble Log Book
+> ***Note*** signitures for logbook are on sheet related to each week. Contact Jules Gribble to see sheet
 ## Week 1
 - Research on ARKit and how it could be used
 - Research existing apps using ARKit and benifits of these apps.
