@@ -23,3 +23,6 @@
 - Connected it to code and created a simple asset table
 - Created insert POST method
 - Made function on IOS app to get asset data `getAssets()` from `/selectAsset`
+### To do next week
+- Create data model for database
+- Create visual for AR
