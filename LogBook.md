@@ -27,3 +27,17 @@
 ### To do next week
 - Create data model for database
 - Create visual for AR
+
+## Week 5
+- Database design
+- Look out how to add 3D object in AR
+### To do next week
+- Make sure endpoints are ReSTful
+
+## Week 6 
+- Ajusted databse to match data model
+- Endpoints changed to match ReSTful paradigm
+- Assets related to Organization making it multi-tenant
+### To do next week
+- finish off endpoints
+- Design UI
