@@ -21,7 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
      **/
     func getAssets(){
         // set up the request
-        let url = URL(string: "http://assetar-stg.herokuapp.com/selectAsset")
+        let url = URL(string: "http://assetar-stg.herokuapp.com/assets")
         let session = URLSession(configuration: .ephemeral, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: url!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
