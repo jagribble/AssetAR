@@ -41,3 +41,6 @@
 ### To do next week
 - finish off endpoints
 - Design UI
+
+## Week 7 
+- Changed data model to get rid of redundant data between dataTypes and assets
