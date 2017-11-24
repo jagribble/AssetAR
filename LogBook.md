@@ -51,3 +51,8 @@
 
 ## Week 8 
 - Looked up OAuth2.0 addons for heroku. [AuthO](https://elements.heroku.com/addons/auth0) addon provides a free 0Auth workflow for free.
+- Work on server implementation of AuthO
+
+### To do next week
+- Think about QRCode/image recognition objects
+- Continue on Auth flow
