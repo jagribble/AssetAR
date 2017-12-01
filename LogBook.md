@@ -56,3 +56,10 @@
 ### To do next week
 - Think about QRCode/image recognition objects
 - Continue on Auth flow
+
+## Week 9 
+- Tried to implement AuthO integration in server
+- Revert back to pre-authentication due to server not working
+
+### To do next week
+- fix Auth flow
