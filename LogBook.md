@@ -44,3 +44,22 @@
 
 ## Week 7 
 - Changed data model to get rid of redundant data between dataTypes and assets
+- Endpoints match new data model
+### To do next week 
+- Start working on web app
+- Look at Oauth2.0
+
+## Week 8 
+- Looked up OAuth2.0 addons for heroku. [AuthO](https://elements.heroku.com/addons/auth0) addon provides a free 0Auth workflow for free.
+- Work on server implementation of AuthO
+
+### To do next week
+- Think about QRCode/image recognition objects
+- Continue on Auth flow
+
+## Week 9 
+- Tried to implement AuthO integration in server
+- Revert back to pre-authentication due to server not working
+
+### To do next week
+- fix Auth flow
