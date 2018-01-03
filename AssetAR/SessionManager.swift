@@ -21,9 +21,14 @@ class SessionManager{
     static let shared = SessionManager()
     let keychain = A0SimpleKeychain(service: "Auth0")
     private let authentication = Auth0.authentication()
-    let credentialsManager: CredentialsManager!
+    var credentialsManager: CredentialsManager!
     var userProfile: UserInfo?
     var credentials: Credentials?
+    var code: String?
+    var challenge: String?
+    var verifier: String?
+    var accessToken: String?
+    
     
     private init () {
         self.credentialsManager = CredentialsManager(authentication: Auth0.authentication())

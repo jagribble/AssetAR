@@ -14,7 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var scheme: String!
+    var path: String!
+    
+    var query: String!
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+        
+        scheme = url.scheme
+        path = url.path
+        query = url.query
+        
+        return true
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        scheme = url.scheme
+        path = url.path
+        query = url.query
+        SessionManager.shared.code = query.components(separatedBy: "&")[0].components(separatedBy: "=")[1]
+        codeVerifier()
+        print("QUERY-> \(query)")
         return Auth0.resumeAuth(url, options: options)
     }
 
