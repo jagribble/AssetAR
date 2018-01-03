@@ -10,6 +10,8 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
+import Auth0
+import SimpleKeychain
 
 class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
@@ -21,13 +23,18 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
      **/
     func getAssets(){
         // set up the request
-        let url = URL(string: "http://assetar-stg.herokuapp.com/assets")
-        let session = URLSession(configuration: .ephemeral, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: url!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+        print("Access Token \(SessionManager.shared.credentials?.accessToken ?? "NO access token tstored")")
+        let url = URL(string: "https://assetar-stg.herokuapp.com/assets")
+        var request = URLRequest(url: url!)
+        // Configure your request here (method, body, etc)
+        request.addValue("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+        print("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")")
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
                 print("No data in url")
                 return
             }
+            print(response)
             // when the repsonse is returned output response
             guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
                 print("Can not convert data to JSON object")

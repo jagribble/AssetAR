@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0687F9E21FFC26B90096A25B /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0687F9E11FFC26B90096A25B /* Home.swift */; };
+		0687F9E41FFC31970096A25B /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0687F9E31FFC31970096A25B /* Auth0.plist */; };
+		0687F9E61FFC3BEE0096A25B /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0687F9E51FFC3BEE0096A25B /* SessionManager.swift */; };
+		0687F9E81FFC82CC0096A25B /* APIAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0687F9E71FFC82CC0096A25B /* APIAccess.swift */; };
 		0691F6EA1F8E1D700029D5A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691F6E91F8E1D700029D5A9 /* AppDelegate.swift */; };
 		0691F6EC1F8E1D700029D5A9 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0691F6EB1F8E1D700029D5A9 /* art.scnassets */; };
 		0691F6EE1F8E1D700029D5A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691F6ED1F8E1D700029D5A9 /* ViewController.swift */; };
@@ -38,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0687F9E11FFC26B90096A25B /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		0687F9E31FFC31970096A25B /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
+		0687F9E51FFC3BEE0096A25B /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		0687F9E71FFC82CC0096A25B /* APIAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccess.swift; sourceTree = "<group>"; };
 		0691F6E61F8E1D700029D5A9 /* AssetAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssetAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0691F6E91F8E1D700029D5A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0691F6EB1F8E1D700029D5A9 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -117,14 +125,18 @@
 			isa = PBXGroup;
 			children = (
 				0691F6E91F8E1D700029D5A9 /* AppDelegate.swift */,
+				0687F9E11FFC26B90096A25B /* Home.swift */,
+				0687F9E51FFC3BEE0096A25B /* SessionManager.swift */,
 				0691F7221F8ED60C0029D5A9 /* pin.jpg */,
 				0691F6EB1F8E1D700029D5A9 /* art.scnassets */,
 				0691F6ED1F8E1D700029D5A9 /* ViewController.swift */,
+				0687F9E71FFC82CC0096A25B /* APIAccess.swift */,
 				0691F6EF1F8E1D700029D5A9 /* Main.storyboard */,
 				0691F6F21F8E1D700029D5A9 /* Assets.xcassets */,
 				0691F6F41F8E1D700029D5A9 /* LaunchScreen.storyboard */,
 				0691F6F71F8E1D700029D5A9 /* Info.plist */,
 				0691F71B1F8E33B10029D5A9 /* Asset.swift */,
+				0687F9E31FFC31970096A25B /* Auth0.plist */,
 			);
 			path = AssetAR;
 			sourceTree = "<group>";
@@ -280,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0687F9E41FFC31970096A25B /* Auth0.plist in Resources */,
 				0691F6EC1F8E1D700029D5A9 /* art.scnassets in Resources */,
 				0691F6F61F8E1D700029D5A9 /* LaunchScreen.storyboard in Resources */,
 				0691F6F31F8E1D700029D5A9 /* Assets.xcassets in Resources */,
@@ -312,11 +325,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AssetAR/Pods-AssetAR-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +381,9 @@
 			files = (
 				0691F71C1F8E33B10029D5A9 /* Asset.swift in Sources */,
 				0691F6EE1F8E1D700029D5A9 /* ViewController.swift in Sources */,
+				0687F9E21FFC26B90096A25B /* Home.swift in Sources */,
+				0687F9E61FFC3BEE0096A25B /* SessionManager.swift in Sources */,
+				0687F9E81FFC82CC0096A25B /* APIAccess.swift in Sources */,
 				0691F6EA1F8E1D700029D5A9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,6 +557,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Gribble.AssetAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "/Users/G/Desktop/Xcode/AssetAR/CommonCrypto/**";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -555,6 +574,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Gribble.AssetAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "/Users/G/Desktop/Xcode/AssetAR/CommonCrypto/**";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
