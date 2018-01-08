@@ -23,12 +23,12 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
      **/
     func getAssets(){
         // set up the request
-        print("Access Token \(SessionManager.shared.accessToken ?? "NO access token tstored")")
+        print("Access Token \(SessionManager.shared.credentials?.accessToken ?? "NO access token tstored")")
         let url = URL(string: "https://assetar-stg.herokuapp.com/assets")
         var request = URLRequest(url: url!)
         // Configure your request here (method, body, etc)
-        request.addValue("Bearer \(SessionManager.shared.accessToken ?? "")", forHTTPHeaderField: "Authorization")
-        print("Bearer \(SessionManager.shared.accessToken ?? "")")
+        request.addValue("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+        print("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")")
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
                 print("No data in url")

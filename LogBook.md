@@ -63,3 +63,7 @@
 
 ### To do next week
 - fix Auth flow
+
+
+## Week 10
+- `Error: Grant type 'http://auth0.com/oauth/grant-type/password-realm' not allowed for the client.` Error fixed via allowing grant type on client 'password' to allow password realm
