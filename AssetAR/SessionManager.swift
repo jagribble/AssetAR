@@ -32,6 +32,7 @@ class SessionManager{
     
     private init () {
         self.credentialsManager = CredentialsManager(authentication: Auth0.authentication())
+        self.credentialsManager.enableBiometrics(withTitle: "Touch to Login")
         // _ = self.authentication.logging(enabled: true) // API Logging
     }
     
@@ -71,22 +72,26 @@ class SessionManager{
         }
     }
     
-    func retrieveProfile(_ callback: @escaping (Error?) -> ()) {
-        guard let accessToken = self.keychain.string(forKey: "access_token") else {
-            return callback(SessionManagerError.noAccessToken)
-        }
+    func retrieveProfile() {
+//        guard let accessToken = self.keychain.string(forKey: "access_token") else {
+//            return //SessionManagerError.noAccessToken
+//        }
         Auth0
             .authentication()
-            .userInfo(withAccessToken: accessToken)
+            .userInfo(withAccessToken: (self.credentials?.accessToken)!)
             .start { result in
                 switch(result) {
                 case .success(let profile):
+                    print("Successfully found profile = \(profile.email ?? "No email")")
+                  
                     self.userProfile = profile
-                    callback(nil)
+//return profile
                 case .failure(let error):
-                    callback(error)
+                   print(error)
+                 //  return nil
                 }
         }
+ 
     }
     
     func logout() {
@@ -94,10 +99,10 @@ class SessionManager{
         self.keychain.clearAll()
     }
     
-    func store(credentials: Credentials) -> Bool {
+    func store(credentials: Credentials) {
         self.credentials = credentials
         // Store credentials in KeyChain
-        return self.credentialsManager.store(credentials: credentials)
+       // self.credentialsManager.store(credentials: credentials)
     }
     
     

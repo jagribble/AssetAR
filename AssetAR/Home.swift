@@ -29,13 +29,21 @@ class HomeController:UIViewController{
                                     // Handle the error
                                     print("Error: \(error)")
                                 case .success(let credentials):
+                                   
                                     // Do something with credentials e.g.: save them.
                                     // Auth0 will automatically dismiss the hosted login page
                                     print("Credentials: \(credentials)")
                                     print(credentials.accessToken ?? "no access token");
+                                   
                                    // print(credentials.refreshToken ?? "no access token");
-                                SessionManager.shared.storeTokens(credentials.accessToken!,idToken:credentials.idToken!)
+                                //SessionManager.shared.storeTokens(credentials.accessToken!,idToken:credentials.idToken!)
                                     SessionManager.shared.store(credentials: credentials)
+                                    SessionManager.shared.retrieveProfile()
+                               
+                                    print(SessionManager.shared.userProfile?.name)
+                                    let alert = UIAlertController(title: "Success", message: "User Successfully logged in: \(String(describing: SessionManager.shared.userProfile?.name) ?? "User Not found")", preferredStyle: UIAlertControllerStyle.alert)
+                                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                    self.present(alert, animated: true, completion: nil)
         }
         }
     }

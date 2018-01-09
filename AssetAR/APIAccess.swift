@@ -8,7 +8,6 @@
 
 import Foundation
 import CommonCrypto
-import PromiseKit
 import Auth0
 
 func codeVerifier(){
