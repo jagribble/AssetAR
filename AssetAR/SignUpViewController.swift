@@ -16,11 +16,12 @@ class SignUpViewController:UIViewController{
     @IBOutlet var password: UITextField!
     
     @IBAction func cancel(_ sender: Any) {
-        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as UIViewController
+        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login") as UIViewController
         self.present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func signUp(_ sender: Any) {
+        let sv = UIViewController.displaySpinner(onView: self.view)
         Auth0
             .authentication()
             .createUser(
@@ -34,10 +35,14 @@ class SignUpViewController:UIViewController{
                 switch result {
                 case .success(let user):
                     print("User Signed up: \(user)")
-                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as UIViewController
-                    self.present(viewController, animated: true, completion: nil)
+                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login") as UIViewController
+                    self.present(viewController, animated: true, completion: {
+                        UIViewController.removeSpinner(spinner: sv)
+                    })
+                
                 case .failure(let error):
                     print("Failed with \(error)")
+                    UIViewController.removeSpinner(spinner: sv)
                     let alert = UIAlertController(title: "Alert", message: "\(error)", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)

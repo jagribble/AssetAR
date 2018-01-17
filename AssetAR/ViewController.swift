@@ -23,29 +23,41 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
      **/
     func getAssets(){
         // set up the request
-        print("Access Token \(SessionManager.shared.credentials?.accessToken ?? "NO access token tstored")")
-        let url = URL(string: "https://assetar-stg.herokuapp.com/assets")
-        var request = URLRequest(url: url!)
-        // Configure your request here (method, body, etc)
-        request.addValue("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")", forHTTPHeaderField: "Authorization")
-        print("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")")
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
-            guard let data = data else {
-                print("No data in url")
+        let sv = UIViewController.displaySpinner(onView: self.view)
+        SessionManager.shared.credentialsManager.credentials { error, credentials in
+            guard error == nil, let credentials = credentials else {
+                // Handle Error
+                // Route user back to Login Screen
                 return
             }
-            print(response)
-            // when the repsonse is returned output response
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
-                print("Can not convert data to JSON object")
-                return
-            }
-            
-            print("----------------------------------")
-            print(json)
-            print("----------------------------------")
-        })
-        task.resume()
+            print("Access Token \(credentials.accessToken ?? "NO access token tstored")")
+            let url = URL(string: "https://assetar-stg.herokuapp.com/assets")
+            var request = URLRequest(url: url!)
+            // Configure your request here (method, body, etc)
+            request.addValue("Bearer \(credentials.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+            print("Bearer \(credentials.accessToken ?? "")")
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                UIViewController.removeSpinner(spinner: sv)
+                guard let data = data else {
+                    let alert = UIAlertController(title: "Error", message: "Can not get Assets please try again later.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                print(response)
+                // when the repsonse is returned output response
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
+                    print("Can not convert data to JSON object")
+                    return
+                }
+                
+                print("----------------------------------")
+                print(json)
+                print("----------------------------------")
+            })
+            task.resume()
+        }
+       
         
     }
     

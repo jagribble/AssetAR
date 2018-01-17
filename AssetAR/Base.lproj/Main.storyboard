@@ -24,11 +24,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="524" y="103"/>
         </scene>
-        <!--Home Controller-->
+        <!--Home View Controller-->
+        <scene sceneID="cca-ci-anl">
+            <objects>
+                <viewController storyboardIdentifier="Home" id="93H-os-8s2" customClass="HomeViewController" customModule="AssetAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lXs-QM-nf9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asset AR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d58-ew-xFs">
+                                <rect key="frame" x="16" y="68" width="343" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5m6-CY-MI9">
+                                <rect key="frame" x="16" y="171" width="343" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="AR"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="brh-gx-evX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qg-tW-n0u">
+                                <rect key="frame" x="307" y="20" width="52" height="30"/>
+                                <state key="normal" title="Log out"/>
+                                <connections>
+                                    <action selector="logout:" destination="93H-os-8s2" eventType="touchUpInside" id="sVI-A1-926"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d58-ew-xFs" firstAttribute="top" secondItem="Ecf-BM-jja" secondAttribute="top" constant="48" id="4aL-Lj-CqO"/>
+                            <constraint firstItem="9Qg-tW-n0u" firstAttribute="top" secondItem="Ecf-BM-jja" secondAttribute="top" id="5tq-px-FNz"/>
+                            <constraint firstItem="5m6-CY-MI9" firstAttribute="leading" secondItem="d58-ew-xFs" secondAttribute="leading" id="B97-Mh-7f7"/>
+                            <constraint firstItem="5m6-CY-MI9" firstAttribute="trailing" secondItem="d58-ew-xFs" secondAttribute="trailing" id="C3H-Fs-aOf"/>
+                            <constraint firstItem="5m6-CY-MI9" firstAttribute="top" secondItem="d58-ew-xFs" secondAttribute="bottom" constant="66" id="ChK-Nu-YDM"/>
+                            <constraint firstItem="9Qg-tW-n0u" firstAttribute="trailing" secondItem="d58-ew-xFs" secondAttribute="trailing" id="Z5g-0H-4Fg"/>
+                            <constraint firstItem="9Qg-tW-n0u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lXs-QM-nf9" secondAttribute="leading" constant="20" symbolic="YES" id="ZFx-HA-Why"/>
+                            <constraint firstItem="d58-ew-xFs" firstAttribute="trailing" secondItem="lXs-QM-nf9" secondAttribute="trailingMargin" id="sTW-DR-fLk"/>
+                            <constraint firstItem="d58-ew-xFs" firstAttribute="leading" secondItem="lXs-QM-nf9" secondAttribute="leadingMargin" id="wkY-1o-kgK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ecf-BM-jja"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vGZ-N2-mnG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305" y="-604"/>
+        </scene>
+        <!--Login View Controller-->
         <scene sceneID="f0x-i2-fIZ">
             <objects>
-                <viewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jy1-J5-pnV" customClass="HomeController" customModule="AssetAR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="jy1-J5-pnV" customClass="LoginViewController" customModule="AssetAR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ec4-yn-Vhw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,14 +89,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="du2-nG-nJy">
-                                <rect key="frame" x="16" y="96" width="343" height="46"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <state key="normal" title="AR"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="anM-UW-ldh"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v4h-UT-4Pa">
                                 <rect key="frame" x="16" y="188" width="343" height="30"/>
                                 <nil key="textColor"/>
@@ -90,26 +132,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5Ru-re-H5w" firstAttribute="top" secondItem="Qpp-CB-ddE" secondAttribute="top" constant="31" id="1FQ-Hj-8Ms"/>
-                            <constraint firstItem="du2-nG-nJy" firstAttribute="leading" secondItem="5Ru-re-H5w" secondAttribute="leading" id="1Kv-WG-bWZ"/>
                             <constraint firstItem="LLI-ca-Odg" firstAttribute="top" secondItem="v4h-UT-4Pa" secondAttribute="bottom" constant="8" symbolic="YES" id="Cup-ij-ayn"/>
                             <constraint firstItem="3TZ-PF-YHD" firstAttribute="leading" secondItem="sTP-7h-Yec" secondAttribute="leading" id="FK5-fz-Dv0"/>
                             <constraint firstItem="sTP-7h-Yec" firstAttribute="top" secondItem="LLI-ca-Odg" secondAttribute="bottom" constant="8" symbolic="YES" id="Hhs-FE-bd7"/>
+                            <constraint firstItem="juF-gy-V9g" firstAttribute="trailing" secondItem="5Ru-re-H5w" secondAttribute="trailing" id="Ifx-NI-0l8"/>
                             <constraint firstItem="v4h-UT-4Pa" firstAttribute="top" secondItem="juF-gy-V9g" secondAttribute="bottom" constant="8" symbolic="YES" id="JiD-fT-RRK"/>
                             <constraint firstItem="LLI-ca-Odg" firstAttribute="trailing" secondItem="sTP-7h-Yec" secondAttribute="trailing" id="K3H-Ze-nAd"/>
-                            <constraint firstItem="juF-gy-V9g" firstAttribute="trailing" secondItem="du2-nG-nJy" secondAttribute="trailing" id="KMY-EP-rPV"/>
                             <constraint firstItem="5Ru-re-H5w" firstAttribute="leading" secondItem="Ec4-yn-Vhw" secondAttribute="leadingMargin" id="Lik-Rg-OiL"/>
-                            <constraint firstItem="juF-gy-V9g" firstAttribute="top" secondItem="du2-nG-nJy" secondAttribute="bottom" constant="17" id="Lju-zH-h1F"/>
                             <constraint firstItem="juF-gy-V9g" firstAttribute="leading" secondItem="v4h-UT-4Pa" secondAttribute="leading" id="PhU-WS-7e1"/>
-                            <constraint firstItem="du2-nG-nJy" firstAttribute="top" secondItem="5Ru-re-H5w" secondAttribute="bottom" constant="8" symbolic="YES" id="QXo-H4-Ppy"/>
-                            <constraint firstItem="juF-gy-V9g" firstAttribute="leading" secondItem="du2-nG-nJy" secondAttribute="leading" id="RWq-0k-NTK"/>
                             <constraint firstItem="3TZ-PF-YHD" firstAttribute="trailing" secondItem="TdZ-ed-pRv" secondAttribute="trailing" id="TFP-AV-758"/>
                             <constraint firstItem="3TZ-PF-YHD" firstAttribute="trailing" secondItem="sTP-7h-Yec" secondAttribute="trailing" id="VPC-Sm-ZKX"/>
                             <constraint firstItem="5Ru-re-H5w" firstAttribute="trailing" secondItem="Ec4-yn-Vhw" secondAttribute="trailingMargin" id="aMc-QW-rPL"/>
+                            <constraint firstItem="juF-gy-V9g" firstAttribute="top" secondItem="5Ru-re-H5w" secondAttribute="bottom" constant="71" id="fnS-tw-1pL"/>
                             <constraint firstItem="v4h-UT-4Pa" firstAttribute="trailing" secondItem="LLI-ca-Odg" secondAttribute="trailing" id="hLV-Rl-J1A"/>
+                            <constraint firstItem="juF-gy-V9g" firstAttribute="leading" secondItem="5Ru-re-H5w" secondAttribute="leading" id="iJd-c7-nOf"/>
                             <constraint firstItem="LLI-ca-Odg" firstAttribute="leading" secondItem="sTP-7h-Yec" secondAttribute="leading" id="nfj-Da-geY"/>
                             <constraint firstItem="v4h-UT-4Pa" firstAttribute="leading" secondItem="LLI-ca-Odg" secondAttribute="leading" id="p8N-OF-RMj"/>
                             <constraint firstItem="3TZ-PF-YHD" firstAttribute="leading" secondItem="TdZ-ed-pRv" secondAttribute="leading" id="q5o-j7-wRB"/>
-                            <constraint firstItem="du2-nG-nJy" firstAttribute="trailing" secondItem="5Ru-re-H5w" secondAttribute="trailing" id="qgq-Ad-YH2"/>
                             <constraint firstItem="3TZ-PF-YHD" firstAttribute="top" secondItem="sTP-7h-Yec" secondAttribute="bottom" constant="31" id="s60-G5-qTc"/>
                             <constraint firstItem="juF-gy-V9g" firstAttribute="trailing" secondItem="v4h-UT-4Pa" secondAttribute="trailing" id="ujV-t1-vj2"/>
                             <constraint firstItem="TdZ-ed-pRv" firstAttribute="top" secondItem="3TZ-PF-YHD" secondAttribute="bottom" constant="8" symbolic="YES" id="zfM-9A-U1b"/>
@@ -123,12 +162,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bkr-94-aRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589.5999999999999" y="31.934032983508249"/>
+            <point key="canvasLocation" x="1350" y="103"/>
         </scene>
         <!--SignUp-->
         <scene sceneID="ki9-zK-zch">
             <objects>
-                <viewController storyboardIdentifier="SignUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V4i-0P-d4t" userLabel="SignUp" customClass="SignUpViewController" customModule="AssetAR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUp" id="V4i-0P-d4t" userLabel="SignUp" customClass="SignUpViewController" customModule="AssetAR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="SignUp" id="W8G-Le-Hk9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -231,6 +270,7 @@
                             <constraint firstItem="Erg-pN-YiZ" firstAttribute="trailing" secondItem="orq-YP-wFB" secondAttribute="trailing" id="k7Z-eJ-yj6"/>
                             <constraint firstItem="ffc-fC-IB3" firstAttribute="trailing" secondItem="vmS-Te-DfU" secondAttribute="trailing" id="kQ7-8V-SiE"/>
                             <constraint firstItem="orq-YP-wFB" firstAttribute="leading" secondItem="8U3-bR-f8G" secondAttribute="leading" id="lJN-21-UPh"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9e7-xA-Hli" secondAttribute="trailing" constant="20" symbolic="YES" id="oQc-ig-iCn"/>
                             <constraint firstItem="ffc-fC-IB3" firstAttribute="trailing" secondItem="ETb-qs-TWe" secondAttribute="trailing" id="s2A-2B-j4t"/>
                             <constraint firstItem="ffc-fC-IB3" firstAttribute="top" secondItem="vmS-Te-DfU" secondAttribute="bottom" constant="17" id="sCc-AW-KXf"/>
                             <constraint firstItem="av7-gy-tgt" firstAttribute="top" secondItem="VoP-bU-2c5" secondAttribute="bottom" constant="8" symbolic="YES" id="sbj-v1-jDb"/>
@@ -249,7 +289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ih2-OQ-IeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2397.5999999999999" y="39.130434782608695"/>
+            <point key="canvasLocation" x="2228" y="103"/>
         </scene>
     </scenes>
 </document>

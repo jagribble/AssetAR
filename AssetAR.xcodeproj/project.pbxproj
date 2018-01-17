@@ -10,7 +10,8 @@
 		067B81F62003B4D50002E49F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B81F52003B4D40002E49F /* SignUpViewController.swift */; };
 		067B81F82003B7A10002E49F /* UIViewControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B81F72003B7A10002E49F /* UIViewControllerExtention.swift */; };
 		067B81FC20042E7C0002E49F /* AR Logo 180px.png in Resources */ = {isa = PBXBuildFile; fileRef = 067B81FB20042E7C0002E49F /* AR Logo 180px.png */; };
-		0687F9E21FFC26B90096A25B /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0687F9E11FFC26B90096A25B /* Home.swift */; };
+		067B81FE200E216B0002E49F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B81FD200E216B0002E49F /* HomeViewController.swift */; };
+		0687F9E21FFC26B90096A25B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0687F9E11FFC26B90096A25B /* LoginViewController.swift */; };
 		0687F9E41FFC31970096A25B /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0687F9E31FFC31970096A25B /* Auth0.plist */; };
 		0687F9E61FFC3BEE0096A25B /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0687F9E51FFC3BEE0096A25B /* SessionManager.swift */; };
 		0687F9E81FFC82CC0096A25B /* APIAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0687F9E71FFC82CC0096A25B /* APIAccess.swift */; };
@@ -48,7 +49,9 @@
 		067B81F52003B4D40002E49F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		067B81F72003B7A10002E49F /* UIViewControllerExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtention.swift; sourceTree = "<group>"; };
 		067B81FB20042E7C0002E49F /* AR Logo 180px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AR Logo 180px.png"; path = "../../../Year3/Individual project/AR Logo 1.2/AR Logo 180px.png"; sourceTree = "<group>"; };
-		0687F9E11FFC26B90096A25B /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		067B81FD200E216B0002E49F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		067B81FF200E29D00002E49F /* AssetAR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AssetAR.entitlements; sourceTree = "<group>"; };
+		0687F9E11FFC26B90096A25B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0687F9E31FFC31970096A25B /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		0687F9E51FFC3BEE0096A25B /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		0687F9E71FFC82CC0096A25B /* APIAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccess.swift; sourceTree = "<group>"; };
@@ -130,9 +133,11 @@
 		0691F6E81F8E1D700029D5A9 /* AssetAR */ = {
 			isa = PBXGroup;
 			children = (
+				067B81FF200E29D00002E49F /* AssetAR.entitlements */,
 				067B81FB20042E7C0002E49F /* AR Logo 180px.png */,
 				0691F6E91F8E1D700029D5A9 /* AppDelegate.swift */,
-				0687F9E11FFC26B90096A25B /* Home.swift */,
+				0687F9E11FFC26B90096A25B /* LoginViewController.swift */,
+				067B81FD200E216B0002E49F /* HomeViewController.swift */,
 				0687F9E51FFC3BEE0096A25B /* SessionManager.swift */,
 				0691F7221F8ED60C0029D5A9 /* pin.jpg */,
 				0691F6EB1F8E1D700029D5A9 /* art.scnassets */,
@@ -259,6 +264,9 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
 							};
@@ -390,8 +398,9 @@
 				0691F71C1F8E33B10029D5A9 /* Asset.swift in Sources */,
 				067B81F62003B4D50002E49F /* SignUpViewController.swift in Sources */,
 				0691F6EE1F8E1D700029D5A9 /* ViewController.swift in Sources */,
-				0687F9E21FFC26B90096A25B /* Home.swift in Sources */,
+				0687F9E21FFC26B90096A25B /* LoginViewController.swift in Sources */,
 				0687F9E61FFC3BEE0096A25B /* SessionManager.swift in Sources */,
+				067B81FE200E216B0002E49F /* HomeViewController.swift in Sources */,
 				067B81F82003B7A10002E49F /* UIViewControllerExtention.swift in Sources */,
 				0687F9E81FFC82CC0096A25B /* APIAccess.swift in Sources */,
 				0691F6EA1F8E1D700029D5A9 /* AppDelegate.swift in Sources */,
@@ -561,6 +570,7 @@
 			baseConfigurationReference = 30453D4DF9493AF965FA0083 /* Pods-AssetAR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AssetAR/AssetAR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JM9MT5J22M;
 				INFOPLIST_FILE = AssetAR/Info.plist;
@@ -578,6 +588,7 @@
 			baseConfigurationReference = 1F26BFBE6A7559601E760D82 /* Pods-AssetAR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AssetAR/AssetAR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JM9MT5J22M;
 				INFOPLIST_FILE = AssetAR/Info.plist;

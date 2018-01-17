@@ -32,30 +32,8 @@ class SessionManager{
     
     private init () {
         self.credentialsManager = CredentialsManager(authentication: Auth0.authentication())
-        self.credentialsManager.enableBiometrics(withTitle: "Touch to Login")
+        self.credentialsManager.enableBiometrics(withTitle: "Touch to authenticate")
         // _ = self.authentication.logging(enabled: true) // API Logging
-    }
-    
-    func storeTokens(_ accessToken: String, idToken: String) {
-        self.keychain.setString(accessToken, forKey: "access_token")
-        self.keychain.setString(idToken, forKey: "id_token")
-    }
-    
-    func retrieve(_ callback: @escaping (Error?) -> ()) {
-        guard let accessToken = self.credentials?.accessToken else {
-            return callback(CredentialsManagerError.noCredentials)
-        }
-        self.authentication.userInfo(withAccessToken: accessToken).start{
-            result in
-            switch(result){
-            case .success(let profile):
-                self.userProfile = profile
-                callback(nil)
-            case .failure(let error):
-                callback(error)
-            
-            }
-        }
     }
     
     func renewAuth(_ callback: @escaping (Error?) -> ()) {
@@ -94,15 +72,75 @@ class SessionManager{
  
     }
     
+    func login(userName:String,password:String,callback:@escaping (Bool)->Void){
+        Auth0.authentication().login(usernameOrEmail: userName, password: password, realm: "Username-Password-Authentication", audience: "https://assetar-stg.herokuapp.com/", scope: "openid profile").start{
+            switch $0 {
+            case .failure(let error):
+                // Handle the error
+                //UIViewController.removeSpinner(spinner: sv)
+                print("Error: \(error)")
+                callback(false)
+//                let alert = UIAlertController(title: "Failed", message: "Please check email or password", preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+            case .success(let credentials):
+                
+                // Do something with credentials e.g.: save them.
+                // Auth0 will automatically dismiss the hosted login page
+                print("Credentials: \(credentials)")
+                print(credentials.accessToken ?? "no access token");
+                
+                // print(credentials.refreshToken ?? "no access token");
+                //SessionManager.shared.storeTokens(credentials.accessToken!,idToken:credentials.idToken!)
+                self.credentialsManager.store(credentials: credentials)
+                callback(true)
+                //self.goHome()
+              //  UIViewController.removeSpinner(spinner: sv)
+                
+                
+            }
+            
+        }
+    }
+    
     func logout() {
         // Remove credentials from KeyChain
         self.keychain.clearAll()
+        self.credentialsManager.clear()
     }
     
-    func store(credentials: Credentials) {
+    
+    /**LEGACY**/
+    func store(credentials: Credentials,completionHandler: @escaping (Bool?) -> Void){
+            // make an URL request
+            // wait for results
+            // check for errors and stuff
+         
         self.credentials = credentials
+        completionHandler(true)
         // Store credentials in KeyChain
        // self.credentialsManager.store(credentials: credentials)
+    }
+    func storeTokens(_ accessToken: String, idToken: String) {
+        self.keychain.setString(accessToken, forKey: "access_token")
+        self.keychain.setString(idToken, forKey: "id_token")
+    }
+    
+    func retrieve(_ callback: @escaping (Error?) -> ()) {
+        guard let accessToken = self.credentials?.accessToken else {
+            return callback(CredentialsManagerError.noCredentials)
+        }
+        self.authentication.userInfo(withAccessToken: accessToken).start{
+            result in
+            switch(result){
+            case .success(let profile):
+                self.userProfile = profile
+                callback(nil)
+            case .failure(let error):
+                callback(error)
+                
+            }
+        }
     }
     
     
