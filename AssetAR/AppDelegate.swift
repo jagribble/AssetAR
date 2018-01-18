@@ -29,12 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-        scheme = url.scheme
-        path = url.path
-        query = url.query
-        SessionManager.shared.code = query.components(separatedBy: "&")[0].components(separatedBy: "=")[1]
-        codeVerifier()
-        print("QUERY-> \(query)")
+//        scheme = url.scheme
+//        path = url.path
+//        query = url.query
+//        SessionManager.shared.code = query.components(separatedBy: "&")[0].components(separatedBy: "=")[1]
+//      //  codeVerifier()
+//        print("QUERY-> \(query)")
         return Auth0.resumeAuth(url, options: options)
     }
 

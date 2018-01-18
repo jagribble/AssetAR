@@ -44,7 +44,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
                     self.present(alert, animated: true, completion: nil)
                     return
                 }
-                print(response)
+                print(response!)
                 // when the repsonse is returned output response
                 guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
                     print("Can not convert data to JSON object")
@@ -108,7 +108,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         let ballNode = SCNNode(geometry: ballShape)
      
         
-        let asset1 = Asset(name: "Asset1", x: 51.451653, z: -0.951794)
+     //   let asset1 = Asset(name: "Asset1", x: 51.451653, z: -0.951794)
         let asset2 = Asset(name: "Asset2", x: 51.441431, z: -0.941817)
        //* work out the location relative to the point the device is
        //https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2
