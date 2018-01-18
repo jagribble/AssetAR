@@ -72,35 +72,49 @@ class SessionManager{
  
     }
     
-    func login(userName:String,password:String,callback:@escaping (Bool)->Void){
-        Auth0.authentication().login(usernameOrEmail: userName, password: password, realm: "Username-Password-Authentication", audience: "https://assetar-stg.herokuapp.com/", scope: "openid profile").start{
-            switch $0 {
-            case .failure(let error):
-                // Handle the error
-                //UIViewController.removeSpinner(spinner: sv)
-                print("Error: \(error)")
-                callback(false)
-//                let alert = UIAlertController(title: "Failed", message: "Please check email or password", preferredStyle: UIAlertControllerStyle.alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//                self.present(alert, animated: true, completion: nil)
-            case .success(let credentials):
+    func login(userName:String,password:String) -> Bool{
+        var status = false
+        
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{
+            Auth0.authentication().login(usernameOrEmail: userName, password: password, realm: "Username-Password-Authentication", audience: "https://assetar-stg.herokuapp.com/", scope: "openid profile").start{
+                switch $0 {
+                case .failure(let error):
+                    // Handle the error
+                    //UIViewController.removeSpinner(spinner: sv)
+                    print("Error: \(error)")
+                    status = false
+                    group.leave()
+                    //callback(false)
+                    
+    //                let alert = UIAlertController(title: "Failed", message: "Please check email or password", preferredStyle: UIAlertControllerStyle.alert)
+    //                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    //                self.present(alert, animated: true, completion: nil)
+                case .success(let credentials):
+                    
+                    // Do something with credentials e.g.: save them.
+                    // Auth0 will automatically dismiss the hosted login page
+                    print("Credentials: \(credentials)")
+                    print(credentials.accessToken ?? "no access token");
+                    
+                    // print(credentials.refreshToken ?? "no access token");
+                    //SessionManager.shared.storeTokens(credentials.accessToken!,idToken:credentials.idToken!)
+                    self.credentialsManager.store(credentials: credentials)
+                    status = true
+                    group.leave()
+                   // callback(true)
+                    //self.goHome()
+                  //  UIViewController.removeSpinner(spinner: sv)
+                    
+                    
+                }
                 
-                // Do something with credentials e.g.: save them.
-                // Auth0 will automatically dismiss the hosted login page
-                print("Credentials: \(credentials)")
-                print(credentials.accessToken ?? "no access token");
-                
-                // print(credentials.refreshToken ?? "no access token");
-                //SessionManager.shared.storeTokens(credentials.accessToken!,idToken:credentials.idToken!)
-                self.credentialsManager.store(credentials: credentials)
-                callback(true)
-                //self.goHome()
-              //  UIViewController.removeSpinner(spinner: sv)
-                
-                
-            }
+                }
             
         }
+        group.wait()
+        return status
     }
     
     func logout() {

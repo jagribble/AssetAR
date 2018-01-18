@@ -15,7 +15,7 @@ class LoginViewController:UIViewController{
     
     @IBOutlet var userName: UITextField!
     @IBOutlet var password: UITextField!
-    
+    var sv: UIView = UIView()
     @IBAction func signUp(_ sender: Any) {
         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as UIViewController
         self.present(viewController, animated: true, completion: nil)
@@ -23,23 +23,36 @@ class LoginViewController:UIViewController{
     
     func loginCustom(){
         
-        let sv = UIViewController.displaySpinner(onView: self.view)
-        SessionManager.shared.login(userName: userName.text!, password: password.text!) 
-        { (status) in
-            if(status){
-                // successfully logged in
-                UIViewController.removeSpinner(spinner: sv)
-              
-                self.goHome()
-            }
-            else{
-                UIViewController.removeSpinner(spinner: sv)
-                let alert = UIAlertController(title: "Failed", message: "Please check email or password", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-            
+        sv = UIViewController.displaySpinner(onView: self.view)
+        
+        let value = SessionManager.shared.login(userName: userName.text!, password: password.text!)
+        if(value){
+           
+            self.goHome()
         }
+        else{
+            UIViewController.removeSpinner(spinner: self.sv)
+            let alert = UIAlertController(title: "Failed", message: "Please check email or password", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+//        { (status) in
+//            if(status){
+//                // successfully logged in
+//
+//
+//                self.goHome()
+//            }
+//            else{
+//                UIViewController.removeSpinner(spinner: self.sv)
+//                let alert = UIAlertController(title: "Failed", message: "Please check email or password", preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+//
+//            }
+//
+//        }
+      
         
 //        Auth0.authentication().login(usernameOrEmail: userName.text!, password: password.text!, realm: "Username-Password-Authentication", audience: "https://assetar-stg.herokuapp.com/", scope: "openid profile").start{
 //            switch $0 {
@@ -70,11 +83,11 @@ class LoginViewController:UIViewController{
     }
     
     func goHome(){
-        
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Home") as! HomeViewController
-            self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: {
+                 UIViewController.removeSpinner(spinner: self.sv)
+            })
         
     }
     
@@ -88,41 +101,45 @@ class LoginViewController:UIViewController{
     let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 
     override func viewDidAppear(_ animated: Bool) {
-        SessionManager.shared.renewAuth { (error) in
-            if(error != nil){
-                print("Not logged in")
-                // self.loginCustom()
-            } else {
-                print("Already Logged in")
-                self.goHome()
-            }
+        if(self.biometrics()){
+            self.goHome()
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        SessionManager.shared.renewAuth { (error) in
-            if(error != nil){
-                print("Not logged in")
-                // self.loginCustom()
-            } else {
-                print("Already Logged in")
-                self.goHome()
+    func biometrics()->Bool{
+        var status = false
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{
+            SessionManager.shared.renewAuth { (error) in
+                if(error != nil){
+                    print("Not logged in")
+                    status = false
+                    group.leave()
+                    // self.loginCustom()
+                } else {
+                    status = true
+                    print("Already Logged in")
+                    group.leave()
+                   // self.goHome()
+                }
             }
         }
+        group.wait()
+        return status
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        if(self.biometrics()){
+//            self.goHome()
+//        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.goHome()
-        SessionManager.shared.renewAuth { (error) in
-            if(error != nil){
-                print("Not logged in")
-               // self.loginCustom()
-            } else {
-                print("Already Logged in")
-                self.goHome()
-            }
-        }
+       
         self.hideKeyboardWhenTappedAround()
     }
     
