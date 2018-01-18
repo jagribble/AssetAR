@@ -64,7 +64,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        self.getAssets()
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -133,7 +133,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         print("ballNodeX = \(ballNodeX),    ballNodeZ = \(ballNodeZ)")
         ballNode.position = SCNVector3Make(ballNodeX,0, ballNodeZ)
         sceneView.scene.rootNode.addChildNode(ballNode)
-            objectSet = true
+        objectSet = true
         }
     }
     
@@ -146,7 +146,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         //detect planes and set the heading of the ARKit world to the heading of north
         configuration.planeDetection = .horizontal
         configuration.worldAlignment = .gravityAndHeading
-        self.getAssets()
+       
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -173,6 +173,19 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         return node
     }
 */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first else {return}
+//        let result = sceneView.hitTest(touch.location(in: sceneView), types: ARHitTestResult.ResultType.featurePoint)
+//        // get the last result as that will be most accurate
+//        guard let hitResult = result.last else {return}
+//        let hitTransform =  hitResult.worldTransform
+//        let hitVector = SCNVector3Make(hitTransform.columns.3.x, hitTransform.columns.3.y, hitTransform.columns.3.z)
+//        
+//        createBall(position: hitVector)
+//        
+//        
+        
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
