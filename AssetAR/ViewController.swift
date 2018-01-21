@@ -12,6 +12,7 @@ import ARKit
 import CoreLocation
 import Auth0
 import SimpleKeychain
+import MapKit
 
 class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
@@ -90,7 +91,12 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         let material = SCNMaterial()
         material.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
         ballShape.materials = [material]
+       // guard let pin = SCNScene(named: "art.scnassets/galaxy.dae") else {return}
+        
         let ballNode = SCNNode(geometry: ballShape)
+        //let ballNode = SCNNode()
+//        ballNode.addChildNode(pin.rootNode)
+//        ballNode.scale = SCNVector3Make(0.1,0.1,0.1)
         ballNode.position = SCNVector3Make(0,0, -1)
         sceneView.scene.rootNode.addChildNode(ballNode)
         //51.441431, -0.941817
@@ -98,40 +104,49 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if(!objectSet){
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-       // print("locations = \(locValue.latitude) \(locValue.longitude)")
-       // print("location data -> \(String(describing: manager.location))")
-        let ballShape = SCNSphere(radius: 1.19)
-        let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/pin.jpg")
-        ballShape.materials = [material]
-        let ballNode = SCNNode(geometry: ballShape)
+            let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+           // print("locations = \(locValue.latitude) \(locValue.longitude)")
+           // print("location data -> \(String(describing: manager.location))")
+            let ballShape = SCNSphere(radius: 1.19)
+            let material = SCNMaterial()
+            material.diffuse.contents = UIImage(named: "art.scnassets/pin.jpg")
+            
+
+            
+            ballShape.materials = [material]
+            let ballNode = SCNNode(geometry: ballShape)
      
-        
-     //   let asset1 = Asset(name: "Asset1", x: 51.451653, z: -0.951794)
-        let asset2 = Asset(name: "Asset2", x: 51.441431, z: -0.941817)
-       //* work out the location relative to the point the device is
-       //https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2
-       // To get directions in gravity&Heading see https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873776-gravityandheading */
-        
-        let ballNodeX:Float
-        let ballNodeZ:Float
-        // if the users longitude value is less than the x value for the asset then take the current location from the assets else do it the other way
-        if(Float(locValue.longitude) < asset2.assetLocationX){
-            ballNodeX = ((asset2.assetLocationX)-(Float(locValue.longitude) ))//East/West
-        } else{
-            ballNodeX = (Float(locValue.longitude)-(asset2.assetLocationX))//East/West
-        }
-        
-          // if the users longitude value is less than the z value for the asset then take the current location from the assets else do it the other way
-        if(Float(locValue.latitude) < asset2.assetLocationZ){
-             ballNodeZ = ( (asset2.assetLocationZ)-(Float(locValue.latitude) ))//North/South
-        } else{
-            ballNodeZ = (Float(locValue.latitude)-(asset2.assetLocationZ))//North/South
-        }
+            // stanlake park windsor wine estate
+            let asset1 = Asset(name: "Asset1", x: 51.470032, z: -0.849879)
+                // elephant and castle
+            let asset2 = Asset(name: "Asset2", x: 51.461792, z:  -0.860224)
+            let asset3 = Asset(name:"Asset 3",x:51.471721, z: -0.861691)
+            let asset4 = Asset(name:"Asset 4",x:51.463258, z: -0.851843)
+           //* work out the location relative to the point the device is
+           //https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2
+           // To get directions in gravity&Heading see https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873776-gravityandheading */
+            
+            let ballNodeX:Float
+            let ballNodeZ:Float
+            
+            print("user Long = (\(Float(locValue.longitude)),\(Float(locValue.latitude))")
+            print("asset Long = (\(asset1.assetLocationZ),\(asset1.assetLocationX))")
+     
+            ballNodeX = ((asset1.assetLocationX)-(Float(locValue.latitude) ))//East/West
+            ballNodeZ = (Float(locValue.longitude)-(asset1.assetLocationZ))//North/South
+            
+            print("ballNodeX = \(ballNodeX*10000),    ballNodeZ = \(ballNodeZ*10000)")
+            // If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
+            // This takes into acccount the four quadrants
+            if((ballNodeZ < 0 && ballNodeX > 0) || (ballNodeX < 0 && ballNodeZ > 0)){
+                ballNode.position = SCNVector3Make(ballNodeX*10000,0, ballNodeZ*10000)
+            } else if((ballNodeZ > 0 && ballNodeX > 0) || (ballNodeZ < 0 && ballNodeX < 0)){
+                ballNode.position = SCNVector3Make(-ballNodeX*10000,0, -ballNodeZ*10000)
+            }
        
-        print("ballNodeX = \(ballNodeX),    ballNodeZ = \(ballNodeZ)")
-        ballNode.position = SCNVector3Make(ballNodeX,0, ballNodeZ)
+       // ballNode.scale = SCNVector3(0.25, 0.25, 0.25)
+      //  ballNode.position = SCNVector3Make(ballNodeX*10000,0, ballNodeZ*10000)
+       // ballNode.position = SCNVector3Make(0,0, -2)
         sceneView.scene.rootNode.addChildNode(ballNode)
         objectSet = true
         }

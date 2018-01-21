@@ -10,18 +10,16 @@ Assets are rendered acording to their relation to the users GPS. When the app is
 ```Swift
 let ballNodeX:Float
 let ballNodeZ:Float
-// if the users longitude value is less than the x value for the asset then take the current location from the assets else do it the other way
-if(Float(locValue.longitude) < asset2.assetLocationX){
-ballNodeX = ((asset2.assetLocationX)-(Float(locValue.longitude) ))//East/West
-} else{
-ballNodeX = (Float(locValue.longitude)-(asset2.assetLocationX))//East/West
-}
+ballNodeX = ((asset1.assetLocationX)-(Float(locValue.latitude) ))//East/West
+ballNodeZ = (Float(locValue.longitude)-(asset1.assetLocationZ))//North/South
 
-// if the users longitude value is less than the z value for the asset then take the current location from the assets else do it the other way
-if(Float(locValue.latitude) < asset2.assetLocationZ){
-ballNodeZ = ( (asset2.assetLocationZ)-(Float(locValue.latitude) ))//North/South
-} else{
-ballNodeZ = (Float(locValue.latitude)-(asset2.assetLocationZ))//North/South
+print("ballNodeX = \(ballNodeX*10000),    ballNodeZ = \(ballNodeZ*10000)")
+// If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
+// This takes into acccount the four quadrants
+if((ballNodeZ < 0 && ballNodeX > 0) || (ballNodeX < 0 && ballNodeZ > 0)){
+ballNode.position = SCNVector3Make(ballNodeX*10000,0, ballNodeZ*10000)
+} else if((ballNodeZ > 0 && ballNodeX > 0) || (ballNodeZ < 0 && ballNodeX < 0)){
+ballNode.position = SCNVector3Make(-ballNodeX*10000,0, -ballNodeZ*10000)
 }
 ```
 
