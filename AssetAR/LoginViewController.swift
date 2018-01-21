@@ -9,6 +9,7 @@
 import UIKit
 import Auth0
 import CommonCrypto
+import LocalAuthentication
 import SafariServices
 
 class LoginViewController:UIViewController{
@@ -108,6 +109,14 @@ class LoginViewController:UIViewController{
     
     func biometrics()->Bool{
         var status = false
+         var error: NSError? = nil
+       
+        LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        if(error != nil){
+            return false
+        }
+      //  UIApplication.shared.is
+        // need to return false if face/touch ID is turned off
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{

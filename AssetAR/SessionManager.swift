@@ -11,6 +11,7 @@
 
 import Foundation
 import Auth0
+import LocalAuthentication
 import SimpleKeychain
 
 enum SessionManagerError: Error {
@@ -32,7 +33,15 @@ class SessionManager{
     
     private init () {
         self.credentialsManager = CredentialsManager(authentication: Auth0.authentication())
-        self.credentialsManager.enableBiometrics(withTitle: "Touch to authenticate")
+        let context = LAContext()
+       // if(context.biometryType == LABiometryType.faceID){
+            self.credentialsManager.enableBiometrics(withTitle: "Use your face to authenticate")
+       // } else if(context.biometryType == LABiometryType.touchID){
+         //   self.credentialsManager.enableBiometrics(withTitle: "Touch to authenticate")
+        //} else {
+          //  print("No biometric authentication")
+        //}
+        
         // _ = self.authentication.logging(enabled: true) // API Logging
     }
     
@@ -82,32 +91,21 @@ class SessionManager{
                 switch $0 {
                 case .failure(let error):
                     // Handle the error
-                    //UIViewController.removeSpinner(spinner: sv)
                     print("Error: \(error)")
                     status = false
                     group.leave()
-                    //callback(false)
-                    
-    //                let alert = UIAlertController(title: "Failed", message: "Please check email or password", preferredStyle: UIAlertControllerStyle.alert)
-    //                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-    //                self.present(alert, animated: true, completion: nil)
+                   
                 case .success(let credentials):
-                    
                     // Do something with credentials e.g.: save them.
                     // Auth0 will automatically dismiss the hosted login page
                     print("Credentials: \(credentials)")
                     print(credentials.accessToken ?? "no access token");
-                    
-                    // print(credentials.refreshToken ?? "no access token");
-                    //SessionManager.shared.storeTokens(credentials.accessToken!,idToken:credentials.idToken!)
+                   
                     self.credentialsManager.store(credentials: credentials)
                     status = true
                     group.leave()
-                   // callback(true)
-                    //self.goHome()
-                  //  UIViewController.removeSpinner(spinner: sv)
-                    
-                    
+                   
+ 
                 }
                 
                 }
