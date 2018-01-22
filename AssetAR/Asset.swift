@@ -9,7 +9,7 @@
 import Foundation
 
 class Asset{
-     var assetName = ""
+    var assetName = ""
     var assetLocationX:Float
     var assetLocationZ:Float
     

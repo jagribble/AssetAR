@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06388CD6201544E900D03130 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06388CD5201544E900D03130 /* MapViewController.swift */; };
+		06388CD820154A5000D03130 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06388CD720154A5000D03130 /* MapAnnotation.swift */; };
+		06388CDA20155FDA00D03130 /* CreateAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06388CD920155FDA00D03130 /* CreateAssetViewController.swift */; };
 		067B81F62003B4D50002E49F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B81F52003B4D40002E49F /* SignUpViewController.swift */; };
 		067B81F82003B7A10002E49F /* UIViewControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B81F72003B7A10002E49F /* UIViewControllerExtention.swift */; };
 		067B81FC20042E7C0002E49F /* AR Logo 180px.png in Resources */ = {isa = PBXBuildFile; fileRef = 067B81FB20042E7C0002E49F /* AR Logo 180px.png */; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06388CD5201544E900D03130 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		06388CD720154A5000D03130 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
+		06388CD920155FDA00D03130 /* CreateAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAssetViewController.swift; sourceTree = "<group>"; };
 		067B81F52003B4D40002E49F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		067B81F72003B7A10002E49F /* UIViewControllerExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtention.swift; sourceTree = "<group>"; };
 		067B81FB20042E7C0002E49F /* AR Logo 180px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AR Logo 180px.png"; path = "../../../Year3/Individual project/AR Logo 1.2/AR Logo 180px.png"; sourceTree = "<group>"; };
@@ -145,11 +151,14 @@
 				0687F9E71FFC82CC0096A25B /* APIAccess.swift */,
 				067B81F52003B4D40002E49F /* SignUpViewController.swift */,
 				0691F6EF1F8E1D700029D5A9 /* Main.storyboard */,
+				06388CD920155FDA00D03130 /* CreateAssetViewController.swift */,
+				06388CD5201544E900D03130 /* MapViewController.swift */,
 				067B81F72003B7A10002E49F /* UIViewControllerExtention.swift */,
 				0691F6F21F8E1D700029D5A9 /* Assets.xcassets */,
 				0691F6F41F8E1D700029D5A9 /* LaunchScreen.storyboard */,
 				0691F6F71F8E1D700029D5A9 /* Info.plist */,
 				0691F71B1F8E33B10029D5A9 /* Asset.swift */,
+				06388CD720154A5000D03130 /* MapAnnotation.swift */,
 				0687F9E31FFC31970096A25B /* Auth0.plist */,
 			);
 			path = AssetAR;
@@ -396,8 +405,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0691F71C1F8E33B10029D5A9 /* Asset.swift in Sources */,
+				06388CDA20155FDA00D03130 /* CreateAssetViewController.swift in Sources */,
 				067B81F62003B4D50002E49F /* SignUpViewController.swift in Sources */,
 				0691F6EE1F8E1D700029D5A9 /* ViewController.swift in Sources */,
+				06388CD6201544E900D03130 /* MapViewController.swift in Sources */,
+				06388CD820154A5000D03130 /* MapAnnotation.swift in Sources */,
 				0687F9E21FFC26B90096A25B /* LoginViewController.swift in Sources */,
 				0687F9E61FFC3BEE0096A25B /* SessionManager.swift in Sources */,
 				067B81FE200E216B0002E49F /* HomeViewController.swift in Sources */,

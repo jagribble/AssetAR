@@ -51,6 +51,93 @@
             </objects>
             <point key="canvasLocation" x="456.80000000000001" y="102.70935960591133"/>
         </scene>
+        <!--Create Asset View Controller-->
+        <scene sceneID="UBf-Xr-11g">
+            <objects>
+                <viewController id="ShS-Vw-zmj" customClass="CreateAssetViewController" customModule="AssetAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p2p-G2-HRr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add an Asset" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gW4-rW-BTh">
+                                <rect key="frame" x="16" y="85" width="343" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uXM-9d-HMQ">
+                                <rect key="frame" x="16" y="208" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Asset Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqG-Hn-Vtc">
+                                <rect key="frame" x="16" y="173" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Latitude" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vig-IN-Uiw">
+                                <rect key="frame" x="16" y="248" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IXw-xv-6k4">
+                                <rect key="frame" x="16" y="359" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Longitude" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHf-lg-3SU">
+                                <rect key="frame" x="16" y="325" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21h-J0-8Z2">
+                                <rect key="frame" x="16" y="466" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create Asset"/>
+                                <connections>
+                                    <action selector="createAsset:" destination="ShS-Vw-zmj" eventType="touchUpInside" id="Rxn-ju-QbV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hP-L8-xeP">
+                                <rect key="frame" x="16" y="418" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Prefill location"/>
+                                <connections>
+                                    <action selector="getLocation:" destination="ShS-Vw-zmj" eventType="touchUpInside" id="L6m-0D-SgS"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Arx-97-UYl">
+                                <rect key="frame" x="16" y="282" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="GGl-8R-sc0"/>
+                    </view>
+                    <connections>
+                        <outlet property="assetName" destination="uXM-9d-HMQ" id="D4L-yJ-rLV"/>
+                        <outlet property="lattitude" destination="Arx-97-UYl" id="esN-hl-bur"/>
+                        <outlet property="longitude" destination="IXw-xv-6k4" id="ZXz-mp-iIx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ohR-fD-9Kr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="432.80000000000001" y="-604.43349753694588"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="cca-ci-anl">
             <objects>
@@ -80,6 +167,26 @@
                                     <action selector="logout:" destination="93H-os-8s2" eventType="touchUpInside" id="sVI-A1-926"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dF2-u7-QW2">
+                                <rect key="frame" x="16" y="270" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0ve-17-bk4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Map View"/>
+                                <connections>
+                                    <segue destination="fQ3-hy-y1a" kind="show" id="9iL-io-cS8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAj-84-RRe">
+                                <rect key="frame" x="16" y="344" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Add Asset"/>
+                                <connections>
+                                    <segue destination="ShS-Vw-zmj" kind="show" id="wrR-eO-7Py"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -88,9 +195,12 @@
                             <constraint firstItem="5m6-CY-MI9" firstAttribute="leading" secondItem="d58-ew-xFs" secondAttribute="leading" id="B97-Mh-7f7"/>
                             <constraint firstItem="5m6-CY-MI9" firstAttribute="trailing" secondItem="d58-ew-xFs" secondAttribute="trailing" id="C3H-Fs-aOf"/>
                             <constraint firstItem="5m6-CY-MI9" firstAttribute="top" secondItem="d58-ew-xFs" secondAttribute="bottom" constant="66" id="ChK-Nu-YDM"/>
+                            <constraint firstItem="dF2-u7-QW2" firstAttribute="trailing" secondItem="5m6-CY-MI9" secondAttribute="trailing" id="TjS-ro-cyK"/>
                             <constraint firstItem="9Qg-tW-n0u" firstAttribute="trailing" secondItem="d58-ew-xFs" secondAttribute="trailing" id="Z5g-0H-4Fg"/>
                             <constraint firstItem="9Qg-tW-n0u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lXs-QM-nf9" secondAttribute="leading" constant="20" symbolic="YES" id="ZFx-HA-Why"/>
+                            <constraint firstItem="dF2-u7-QW2" firstAttribute="top" secondItem="5m6-CY-MI9" secondAttribute="bottom" constant="29" id="cO8-BK-2Nn"/>
                             <constraint firstItem="d58-ew-xFs" firstAttribute="trailing" secondItem="lXs-QM-nf9" secondAttribute="trailingMargin" id="sTW-DR-fLk"/>
+                            <constraint firstItem="dF2-u7-QW2" firstAttribute="leading" secondItem="5m6-CY-MI9" secondAttribute="leading" id="vzs-zC-fyH"/>
                             <constraint firstItem="d58-ew-xFs" firstAttribute="leading" secondItem="lXs-QM-nf9" secondAttribute="leadingMargin" id="wkY-1o-kgK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ecf-BM-jja"/>
@@ -98,7 +208,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vGZ-N2-mnG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1305" y="-604"/>
+            <point key="canvasLocation" x="1304.8" y="-604.43349753694588"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="j1Q-Iy-EKt">
+            <objects>
+                <viewController id="fQ3-hy-y1a" customClass="MapViewController" customModule="AssetAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="knB-yG-NiI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0XE-ac-Zre">
+                                <rect key="frame" x="0.0" y="75" width="375" height="737"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xF0-dG-sZJ">
+                                <rect key="frame" x="22" y="44" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="back:" destination="fQ3-hy-y1a" eventType="touchUpInside" id="mrv-iY-63U"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0XE-ac-Zre" firstAttribute="leading" secondItem="knB-yG-NiI" secondAttribute="leading" id="4vV-ev-JXY"/>
+                            <constraint firstItem="xF0-dG-sZJ" firstAttribute="top" secondItem="ekh-rZ-9Yb" secondAttribute="top" id="But-uA-ede"/>
+                            <constraint firstAttribute="trailing" secondItem="0XE-ac-Zre" secondAttribute="trailing" id="DEy-rL-iad"/>
+                            <constraint firstItem="xF0-dG-sZJ" firstAttribute="leading" secondItem="ekh-rZ-9Yb" secondAttribute="leading" constant="22" id="Pvl-BE-47l"/>
+                            <constraint firstItem="0XE-ac-Zre" firstAttribute="top" secondItem="xF0-dG-sZJ" secondAttribute="bottom" constant="1" id="Wnu-dO-Qpf"/>
+                            <constraint firstAttribute="bottom" secondItem="0XE-ac-Zre" secondAttribute="bottom" id="tBm-Iu-wMZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ekh-rZ-9Yb"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="0XE-ac-Zre" id="w9D-Dm-e6E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Syw-3K-enh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2228" y="-604.43349753694588"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="f0x-i2-fIZ">
