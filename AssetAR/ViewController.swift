@@ -70,7 +70,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
                 var i = 0
                 while i<assets.count{
                     let instance = assets[i] as! [String:AnyObject]
-                    let asset = Asset(name: instance["assetname"] as! String, x: instance["assetx"] as! Float , z: instance["assety"] as! Float)
+                     let asset = Asset(id: instance["assetid"] as! Int ,name: instance["assetname"] as! String, x: instance["assetx"] as! Float , z: instance["assety"] as! Float,oId: instance["orginizationid"] as! Int)
                     self.assetArray.append(asset)
                     i = i+1
                 }
@@ -178,11 +178,11 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             let ballNode = SCNNode(geometry: ballShape)
      
             // stanlake park windsor wine estate
-            let asset1 = Asset(name: "Asset1", x: 51.470032, z: -0.849879)
+            let asset1 = Asset(id:1,name: "Asset1", x: 51.470032, z: -0.849879,oId:1)
                 // elephant and castle
-            let asset2 = Asset(name: "Asset2", x: 51.461792, z:  -0.860224)
-            let asset3 = Asset(name:"Asset 3",x:51.471721, z: -0.861691)
-            let asset4 = Asset(name:"Asset 4",x:51.463258, z: -0.851843)
+          //  let asset2 = Asset(name: "Asset2", x: 51.461792, z:  -0.860224)
+           // let asset3 = Asset(name:"Asset 3",x:51.471721, z: -0.861691)
+            //let asset4 = Asset(name:"Asset 4",x:51.463258, z: -0.851843)
            //* work out the location relative to the point the device is
            //https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2
            // To get directions in gravity&Heading see https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873776-gravityandheading */

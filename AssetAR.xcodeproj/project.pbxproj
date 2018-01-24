@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0631B61F20177EA5003FD3A9 /* AssetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631B61E20177EA5003FD3A9 /* AssetListView.swift */; };
+		0631B62120178030003FD3A9 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631B62020178030003FD3A9 /* AssetTableViewCell.swift */; };
+		0631B6252017B663003FD3A9 /* AssetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631B6242017B663003FD3A9 /* AssetDetailViewController.swift */; };
 		06388CD6201544E900D03130 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06388CD5201544E900D03130 /* MapViewController.swift */; };
 		06388CD820154A5000D03130 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06388CD720154A5000D03130 /* MapAnnotation.swift */; };
 		06388CDA20155FDA00D03130 /* CreateAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06388CD920155FDA00D03130 /* CreateAssetViewController.swift */; };
@@ -49,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0631B61E20177EA5003FD3A9 /* AssetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListView.swift; sourceTree = "<group>"; };
+		0631B62020178030003FD3A9 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
+		0631B6242017B663003FD3A9 /* AssetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailViewController.swift; sourceTree = "<group>"; };
 		06388CD5201544E900D03130 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		06388CD720154A5000D03130 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		06388CD920155FDA00D03130 /* CreateAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAssetViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +157,9 @@
 				0687F9E71FFC82CC0096A25B /* APIAccess.swift */,
 				067B81F52003B4D40002E49F /* SignUpViewController.swift */,
 				0691F6EF1F8E1D700029D5A9 /* Main.storyboard */,
+				0631B6242017B663003FD3A9 /* AssetDetailViewController.swift */,
+				0631B62020178030003FD3A9 /* AssetTableViewCell.swift */,
+				0631B61E20177EA5003FD3A9 /* AssetListView.swift */,
 				06388CD920155FDA00D03130 /* CreateAssetViewController.swift */,
 				06388CD5201544E900D03130 /* MapViewController.swift */,
 				067B81F72003B7A10002E49F /* UIViewControllerExtention.swift */,
@@ -404,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0631B62120178030003FD3A9 /* AssetTableViewCell.swift in Sources */,
 				0691F71C1F8E33B10029D5A9 /* Asset.swift in Sources */,
 				06388CDA20155FDA00D03130 /* CreateAssetViewController.swift in Sources */,
 				067B81F62003B4D50002E49F /* SignUpViewController.swift in Sources */,
@@ -411,11 +421,13 @@
 				06388CD6201544E900D03130 /* MapViewController.swift in Sources */,
 				06388CD820154A5000D03130 /* MapAnnotation.swift in Sources */,
 				0687F9E21FFC26B90096A25B /* LoginViewController.swift in Sources */,
+				0631B6252017B663003FD3A9 /* AssetDetailViewController.swift in Sources */,
 				0687F9E61FFC3BEE0096A25B /* SessionManager.swift in Sources */,
 				067B81FE200E216B0002E49F /* HomeViewController.swift in Sources */,
 				067B81F82003B7A10002E49F /* UIViewControllerExtention.swift in Sources */,
 				0687F9E81FFC82CC0096A25B /* APIAccess.swift in Sources */,
 				0691F6EA1F8E1D700029D5A9 /* AppDelegate.swift in Sources */,
+				0631B61F20177EA5003FD3A9 /* AssetListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

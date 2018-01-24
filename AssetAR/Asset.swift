@@ -9,14 +9,24 @@
 import Foundation
 
 class Asset{
+    var id:Int
     var assetName = ""
     var assetLocationX:Float
     var assetLocationZ:Float
+    var orgainsationID:Int
     
-    init(name: String, x:Float, z:Float) {
+//    init(name: String, x:Float, z:Float) {
+//        self.assetName = name
+//        self.assetLocationX = x
+//        self.assetLocationZ = z
+//    }
+    
+    init(id: Int,name: String, x:Float, z:Float,oId:Int) {
+        self.id = id
         self.assetName = name
         self.assetLocationX = x
         self.assetLocationZ = z
+        self.orgainsationID = oId
     }
     
 }

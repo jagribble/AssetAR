@@ -69,7 +69,7 @@ class MapViewController:UIViewController,CLLocationManagerDelegate{
                 var i = 0
                 while i<assets.count{
                     let instance = assets[i] as! [String:AnyObject]
-                    let asset = Asset(name: instance["assetname"] as! String, x: instance["assetx"] as! Float , z: instance["assety"] as! Float)
+                    let asset = Asset(id: instance["assetid"] as! Int ,name: instance["assetname"] as! String, x: instance["assetx"] as! Float , z: instance["assety"] as! Float,oId: instance["orginizationid"] as! Int)  
                     self.assetArray.append(asset)
                     i = i+1
                 }

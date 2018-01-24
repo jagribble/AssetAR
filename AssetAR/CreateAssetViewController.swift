@@ -17,18 +17,32 @@ class CreateAssetViewController:UIViewController,CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
     
+    @IBAction func back(_ sender: Any) {
+        self.goHome()
+    }
+    
     @IBAction func createAsset(_ sender: Any) {
         let sv = UIViewController.displaySpinner(onView: self.view)
         let _assetName = self.assetName.text!
         let _lattitude = self.lattitude.text!
         let _longitude = self.longitude.text!
-        if(self.addAsset(_assetName: _assetName, _lattitude: _lattitude, _longitude: _longitude)){
-            UIViewController.removeSpinner(spinner: sv)
-            self.goHome()
+        if(!_assetName.isEmpty && !_lattitude.isEmpty && !_longitude.isEmpty){
+            print(!_assetName.isEmpty)
+            if(self.addAsset(_assetName: _assetName, _lattitude: _lattitude, _longitude: _longitude)){
+                UIViewController.removeSpinner(spinner: sv)
+                self.goHome()
+            } else{
+                UIViewController.removeSpinner(spinner: sv)
+                let alert = UIAlertController(title: "Error", message: "Please make sure all information is correctley filled out", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         } else{
             UIViewController.removeSpinner(spinner: sv)
+            let alert = UIAlertController(title: "Error", message: "Please make sure all information is correctley filled out", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
-        
     }
 
 
@@ -51,6 +65,7 @@ class CreateAssetViewController:UIViewController,CLLocationManagerDelegate{
                     postData = try JSONSerialization.data(withJSONObject: dictionaryData) as NSData
                 } catch {
                     print(error)
+                    group.leave()
                 }
                 print("headers = \(headers.description)")
                 let url = URL(string: "http://assetar-stg.herokuapp.com/insert/asset")
@@ -66,6 +81,8 @@ class CreateAssetViewController:UIViewController,CLLocationManagerDelegate{
                 URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
                     if (error != nil) {
                         print(error ?? "")
+                        status = false
+                        group.leave()
                      //   UIViewController.removeSpinner(spinner: sv)
                     } else {
                         let httpResponse = response
