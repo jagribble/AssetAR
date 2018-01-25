@@ -68,7 +68,7 @@ class CreateAssetViewController:UIViewController,CLLocationManagerDelegate{
                     group.leave()
                 }
                 print("headers = \(headers.description)")
-                let url = URL(string: "http://assetar-stg.herokuapp.com/insert/asset")
+                let url = URL(string: "http://assetar-stg.herokuapp.com/api/insert/asset")
                 var request = URLRequest(url: url!)
                 
                 request.httpMethod = "POST"

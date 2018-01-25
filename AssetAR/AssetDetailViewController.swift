@@ -59,7 +59,7 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
                     return
                 }
                 print("Access Token \(credentials.accessToken ?? "NO access token tstored")")
-                let url = URL(string: "https://assetar-stg.herokuapp.com/delete/"+String(assetID))
+                let url = URL(string: "https://assetar-stg.herokuapp.com/api/delete/"+String(assetID))
                 var request = URLRequest(url: url!)
                 request.httpMethod = "DELETE"
                 // Configure your request here (method, body, etc)

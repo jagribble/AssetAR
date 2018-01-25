@@ -42,7 +42,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
                 return
             }
             print("Access Token \(credentials.accessToken ?? "NO access token tstored")")
-            let url = URL(string: "https://assetar-stg.herokuapp.com/assets")
+            let url = URL(string: "https://assetar-stg.herokuapp.com/api/assets")
             var request = URLRequest(url: url!)
             // Configure your request here (method, body, etc)
             request.addValue("Bearer \(credentials.accessToken ?? "")", forHTTPHeaderField: "Authorization")
@@ -135,12 +135,12 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             let ballNode = SCNNode(geometry: ballShape)
             let ballNodeX:Float
             let ballNodeZ:Float
-            
-            print("user Long = (\(Float((locValue?.longitude)!)),\(Float((locValue?.latitude)!))")
+            let location = locationManager.location?.coordinate
+            print("user Long = (\(Float((location?.longitude)!)),\(Float((location?.latitude)!))")
             print("asset Long = (\(asset.assetLocationZ),\(asset.assetLocationX))")
             
-            ballNodeX = ((asset.assetLocationX)-(Float((locValue?.latitude)!) ))//East/West
-            ballNodeZ = (Float((locValue?.longitude)!)-(asset.assetLocationZ))//North/South
+            ballNodeX = ((asset.assetLocationX)-(Float((location?.latitude)!) ))//East/West
+            ballNodeZ = (Float((location?.longitude)!)-(asset.assetLocationZ))//North/South
             
             print("ballNodeX = \(ballNodeX*1000),    ballNodeZ = \(ballNodeZ*1000)")
             // If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
