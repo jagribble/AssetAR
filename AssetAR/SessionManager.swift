@@ -35,7 +35,7 @@ class SessionManager{
         self.credentialsManager = CredentialsManager(authentication: Auth0.authentication())
         let context = LAContext()
        // if(context.biometryType == LABiometryType.faceID){
-            self.credentialsManager.enableBiometrics(withTitle: "Use your face to authenticate")
+            self.credentialsManager.enableBiometrics(withTitle: "Touch to authenticate")
        // } else if(context.biometryType == LABiometryType.touchID){
          //   self.credentialsManager.enableBiometrics(withTitle: "Touch to authenticate")
         //} else {

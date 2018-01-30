@@ -23,6 +23,10 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     
     @IBAction func back(_ sender: Any) {
         print("Go back")
+        self.goHome()
+    }
+    
+    func goHome(){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Home") as? HomeViewController {
             self.present(viewController, animated: true, completion: nil)
@@ -92,7 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         
         // Create a new scene
         let scene = SCNScene()
@@ -109,19 +113,19 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         } else{
             print("location manager disabled")
         }
-         self.getAssets()
-        let ballShape = SCNSphere(radius: 0.09)
-        let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
-        ballShape.materials = [material]
-      //  guard let pin = SCNScene(named: "art.scnassets/test.dae") else {return}
-        
-        let ballNode = SCNNode(geometry: ballShape)
-//        let ballNode = SCNNode()
-//        ballNode.addChildNode(pin.rootNode)
-//        ballNode.scale = SCNVector3Make(0.5,0.5,0.5)
-//        ballNode.position = SCNVector3Make(0,0, -1)
-        sceneView.scene.rootNode.addChildNode(ballNode)
+        self.getAssets()
+//        let ballShape = SCNSphere(radius: 0.09)
+//        let material = SCNMaterial()
+//        material.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
+//        ballShape.materials = [material]
+//      //  guard let pin = SCNScene(named: "art.scnassets/test.dae") else {return}
+//
+//        let ballNode = SCNNode(geometry: ballShape)
+////        let ballNode = SCNNode()
+////        ballNode.addChildNode(pin.rootNode)
+////        ballNode.scale = SCNVector3Make(0.5,0.5,0.5)
+////        ballNode.position = SCNVector3Make(0,0, -1)
+//        sceneView.scene.rootNode.addChildNode(ballNode)
         //51.441431, -0.941817
     }
     
@@ -163,55 +167,6 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if(!objectSet){
-             locValue = manager.location!.coordinate
-           // print("locations = \(locValue.latitude) \(locValue.longitude)")
-           // print("location data -> \(String(describing: manager.location))")
-            let ballShape = SCNSphere(radius: 1.19)
-            let material = SCNMaterial()
-            material.diffuse.contents = UIImage(named: "art.scnassets/pin.jpg")
-            
-
-            
-            ballShape.materials = [material]
-            let ballNode = SCNNode(geometry: ballShape)
-     
-            // stanlake park windsor wine estate
-            let asset1 = Asset(id:1,name: "Asset1", x: 51.470032, z: -0.849879,oId:1)
-                // elephant and castle
-          //  let asset2 = Asset(name: "Asset2", x: 51.461792, z:  -0.860224)
-           // let asset3 = Asset(name:"Asset 3",x:51.471721, z: -0.861691)
-            //let asset4 = Asset(name:"Asset 4",x:51.463258, z: -0.851843)
-           //* work out the location relative to the point the device is
-           //https://www.raywenderlich.com/146436/augmented-reality-ios-tutorial-location-based-2
-           // To get directions in gravity&Heading see https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873776-gravityandheading */
-            
-            let ballNodeX:Float
-            let ballNodeZ:Float
-            
-            print("user Long = (\(Float((locValue?.longitude)!)),\(Float((locValue?.latitude)!))")
-            print("asset Long = (\(asset1.assetLocationZ),\(asset1.assetLocationX))")
-     
-            ballNodeX = ((asset1.assetLocationX)-(Float((locValue?.latitude)!) ))//East/West
-            ballNodeZ = (Float((locValue?.longitude)!)-(asset1.assetLocationZ))//North/South
-            
-            print("ballNodeX = \(ballNodeX*10000),    ballNodeZ = \(ballNodeZ*10000)")
-            // If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
-            // This takes into acccount the four quadrants
-            if((ballNodeZ < 0 && ballNodeX > 0) || (ballNodeX < 0 && ballNodeZ > 0)){
-                ballNode.position = SCNVector3Make(ballNodeX*10000,0, ballNodeZ*10000)
-            } else if((ballNodeZ > 0 && ballNodeX > 0) || (ballNodeZ < 0 && ballNodeX < 0)){
-                ballNode.position = SCNVector3Make(-ballNodeX*10000,0, -ballNodeZ*10000)
-            }
-       
-       // ballNode.scale = SCNVector3(0.25, 0.25, 0.25)
-      //  ballNode.position = SCNVector3Make(ballNodeX*10000,0, ballNodeZ*10000)
-       // ballNode.position = SCNVector3Make(0,0, -2)
-        sceneView.scene.rootNode.addChildNode(ballNode)
-        objectSet = true
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -220,7 +175,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         //detect planes and set the heading of the ARKit world to the heading of north
-        configuration.planeDetection = .horizontal
+       // configuration.planeDetection = .horizontal
         configuration.worldAlignment = .gravityAndHeading
        
         // Run the view's session
@@ -265,12 +220,19 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
+        let alert = UIAlertController(title: "Error", message: "Error with ARKit! Please report to Admin", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(alert: UIAlertAction!) in self.goHome()}))
+        self.present(alert, animated: true, completion: {
+            self.goHome()
+            
+        })
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
+        let alert = UIAlertController(title: "Error", message: "Error with ARKit! Session Interrupted. Please report to Admin", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,  handler: {(alert: UIAlertAction!) in self.goHome()}))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {

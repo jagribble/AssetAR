@@ -50,7 +50,7 @@ class SignUpViewController:UIViewController{
                     
                     case .failure(let error):
                         print("Failed with \(error)")
-                        errorString = error as! String
+                        errorString = error.localizedDescription
                         status = false
                         group.leave()
                       
