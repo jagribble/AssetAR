@@ -135,17 +135,32 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             let material = SCNMaterial()
             material.diffuse.contents = UIImage(named: "art.scnassets/pin.jpg")
             
+            var minLat: CLLocationDegrees = 1000
+            var maxLat: CLLocationDegrees = -1000
+            var minLon: CLLocationDegrees = 1000
+            var maxLon: CLLocationDegrees = -1000
+            let latitude = CLLocationDegrees(asset.assetLocationZ)
+            let longitude = CLLocationDegrees(asset.assetLocationX)
+            
+            if latitude < minLat { minLat = latitude }
+            if latitude > maxLat { maxLat = latitude }
+            if longitude < minLon { minLon = longitude }
+            if longitude > maxLon { maxLon = longitude }
+            
             ballShape.materials = [material]
             let ballNode = SCNNode(geometry: ballShape)
             let ballNodeX:Float
             let ballNodeZ:Float
             let location = locationManager.location?.coordinate
+            print("AssetName = \(asset.assetName)")
             print("user Long = (\(Float((location?.longitude)!)),\(Float((location?.latitude)!))")
             print("asset Long = (\(asset.assetLocationZ),\(asset.assetLocationX))")
-            
+            print("BallNodx = \(asset.assetLocationX) - \(location?.latitude) = \(((asset.assetLocationX)-(Float((location?.latitude)!) )))")
+            print("BallNodeZ = \(location?.longitude) - \(asset.assetLocationZ) = \((Float((location?.longitude)!)-(asset.assetLocationZ)))")
+            print("--------------------------------------")
             ballNodeX = ((asset.assetLocationX)-(Float((location?.latitude)!) ))//East/West
             ballNodeZ = (Float((location?.longitude)!)-(asset.assetLocationZ))//North/South
-            
+             // ballNodeZ = ((asset.assetLocationZ)-(Float((location?.longitude)!))//North/South
             print("ballNodeX = \(ballNodeX*1000),    ballNodeZ = \(ballNodeZ*1000)")
             // If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
             // This takes into acccount the four quadrants
@@ -163,7 +178,21 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             spin.duration = 8
             spin.repeatCount = .infinity
             ballNode.addAnimation(spin, forKey: "spin around")
+            let text = SCNText(string: asset.assetName, extrusionDepth: 1.0)
+            let textNode = SCNNode(geometry: text)
+            textNode.position = SCNVector3Make(ballNode.position.x,-2.0,ballNode.position.z)
+            let ballLocation = CLLocation(latitude: CLLocationDegrees(asset.assetLocationZ), longitude: CLLocationDegrees(asset.assetLocationX))
+            let distance = ballLocation.distance(from: locationManager.location!).rounded(FloatingPointRoundingRule.toNearestOrEven)/100000
+            print("distance = \(distance)")
+            textNode.scale = SCNVector3Make(Float(0.001*distance), Float(0.001*distance), Float(0.001*distance))
+            //textNode.scale = SCNVector3Make(Float(1), Float(1), Float(1))
+            textNode.simdRotation = (sceneView.pointOfView?.simdRotation)!
+            sceneView.scene.rootNode.addChildNode(textNode)
             sceneView.scene.rootNode.addChildNode(ballNode)
+            
+            
+            
+            
         }
     }
     
@@ -205,11 +234,12 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     }
 */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first else {return}
-//        let result = sceneView.hitTest(touch.location(in: sceneView), types: ARHitTestResult.ResultType.featurePoint)
+        guard let touch = touches.first else {return}
+        let result = sceneView.hitTest(touch.location(in: sceneView), types: ARHitTestResult.ResultType.featurePoint)
 //        // get the last result as that will be most accurate
-//        guard let hitResult = result.last else {return}
-//        let hitTransform =  hitResult.worldTransform
+        guard let hitResult = result.last else {return}
+        let hitTransform =  hitResult.worldTransform
+        
 //        let hitVector = SCNVector3Make(hitTransform.columns.3.x, hitTransform.columns.3.y, hitTransform.columns.3.z)
 //        
 //        createBall(position: hitVector)
