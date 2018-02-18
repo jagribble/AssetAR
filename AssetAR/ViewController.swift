@@ -131,45 +131,57 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     
     func drawAssets(){
         for asset in assetArray{
-            let ballShape = SCNSphere(radius: 1.19)
+            
+            let scale = self.getScale(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
+            print("AssetName = \(asset.assetName)")
+
+            print("Scale = \(scale.x)")
+            let ballShape : SCNGeometry
+            let text = SCNText(string: asset.assetName, extrusionDepth: 1.0)
+            if(scale.x > 10){
+                ballShape = SCNSphere(radius:1)
+                text.font = UIFont(name: "Helvatica", size: CGFloat(100/scale.x))
+            } else if (scale.x > 1 && scale.x < 10){
+                ballShape = SCNSphere(radius: 10)
+            } else{
+                ballShape = SCNSphere(radius: CGFloat(10 / scale.x))
+            }
+
             let material = SCNMaterial()
             material.diffuse.contents = UIImage(named: "art.scnassets/pin.jpg")
-            
-            var minLat: CLLocationDegrees = 1000
-            var maxLat: CLLocationDegrees = -1000
-            var minLon: CLLocationDegrees = 1000
-            var maxLon: CLLocationDegrees = -1000
-            let latitude = CLLocationDegrees(asset.assetLocationZ)
-            let longitude = CLLocationDegrees(asset.assetLocationX)
-            
-            if latitude < minLat { minLat = latitude }
-            if latitude > maxLat { maxLat = latitude }
-            if longitude < minLon { minLon = longitude }
-            if longitude > maxLon { maxLon = longitude }
             
             ballShape.materials = [material]
             let ballNode = SCNNode(geometry: ballShape)
             let ballNodeX:Float
             let ballNodeZ:Float
             let location = locationManager.location?.coordinate
-            print("AssetName = \(asset.assetName)")
-            print("user Long = (\(Float((location?.longitude)!)),\(Float((location?.latitude)!))")
-            print("asset Long = (\(asset.assetLocationZ),\(asset.assetLocationX))")
-            print("BallNodx = \(asset.assetLocationX) - \(location?.latitude) = \(((asset.assetLocationX)-(Float((location?.latitude)!) )))")
-            print("BallNodeZ = \(location?.longitude) - \(asset.assetLocationZ) = \((Float((location?.longitude)!)-(asset.assetLocationZ)))")
-            print("--------------------------------------")
-            ballNodeX = ((asset.assetLocationX)-(Float((location?.latitude)!) ))//East/West
-            ballNodeZ = (Float((location?.longitude)!)-(asset.assetLocationZ))//North/South
-             // ballNodeZ = ((asset.assetLocationZ)-(Float((location?.longitude)!))//North/South
-            print("ballNodeX = \(ballNodeX*1000),    ballNodeZ = \(ballNodeZ*1000)")
-            // If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
-            // This takes into acccount the four quadrants
-            if((ballNodeZ < 0 && ballNodeX > 0) || (ballNodeX < 0 && ballNodeZ > 0)){
-                ballNode.position = SCNVector3Make(ballNodeX*1000,0, ballNodeZ*1000)
-            } else if((ballNodeZ > 0 && ballNodeX > 0) || (ballNodeZ < 0 && ballNodeX < 0)){
-                ballNode.position = SCNVector3Make(-ballNodeX*1000,0, -ballNodeZ*1000)
-            }
+            let scaleFactor:Float = 1000
             
+//            print("AssetName = \(asset.assetName)")
+//            print("user Long = (\(Float((location?.longitude)!)),\(Float((location?.latitude)!))")
+//            print("asset Long = (\(asset.assetLocationZ),\(asset.assetLocationX))")
+//            print("BallNodx = \(asset.assetLocationX) - \(location?.latitude) = \(((asset.assetLocationX)-(Float((location?.latitude)!) )))")
+//            print("BallNodeZ = \(location?.longitude) - \(asset.assetLocationZ) = \((Float((location?.longitude)!)-(asset.assetLocationZ)))")
+//            print("--------------------------------------")
+//            ballNodeX = ((asset.assetLocationX)-(Float((location?.latitude)!) ))//East/West
+//            ballNodeZ = (Float((location?.longitude)!)-(asset.assetLocationZ))//North/South
+//
+//            if ballNodeZ < minLat { minLat = ballNodeZ }
+//            if ballNodeZ > maxLat { maxLat = ballNodeZ }
+//            if ballNodeX < minLon { minLon = ballNodeX }
+//            if ballNodeX > maxLon { maxLon = ballNodeX }
+//             // ballNodeZ = ((asset.assetLocationZ)-(Float((location?.longitude)!))//North/South
+//            print("ballNodeX = \(ballNodeX*scaleFactor),    ballNodeZ = \(ballNodeZ*scaleFactor)")
+//            // If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
+//            // This takes into acccount the four quadrants
+//            //TODO: LOOK AT THIS!!
+//            if((ballNodeZ < 0 && ballNodeX > 0) || (ballNodeX < 0 && ballNodeZ > 0)){
+//                ballNode.position = SCNVector3Make(ballNodeX*scaleFactor,0, ballNodeZ*scaleFactor)
+//            } else if((ballNodeZ > 0 && ballNodeX > 0) || (ballNodeZ < 0 && ballNodeX < 0)){
+//                ballNode.position = SCNVector3Make(-ballNodeX*scaleFactor,0, -ballNodeZ*scaleFactor)
+//            }
+            ballNode.position = self.getTranslation(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
+            ballNode.scale = scale
             let spin = CABasicAnimation(keyPath: "rotation")
             // Use from-to to explicitly make a full rotation around z
             spin.fromValue =  SCNVector4Make(0, 1, 0, 0)
@@ -178,14 +190,13 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             spin.duration = 8
             spin.repeatCount = .infinity
             ballNode.addAnimation(spin, forKey: "spin around")
-            let text = SCNText(string: asset.assetName, extrusionDepth: 1.0)
+          //  let text = SCNText(string: asset.assetName, extrusionDepth: 1.0)
             let textNode = SCNNode(geometry: text)
-            textNode.position = SCNVector3Make(ballNode.position.x,-2.0,ballNode.position.z)
+            textNode.position = SCNVector3Make(ballNode.position.x,-3.0,ballNode.position.z)
             let ballLocation = CLLocation(latitude: CLLocationDegrees(asset.assetLocationZ), longitude: CLLocationDegrees(asset.assetLocationX))
-            let distance = ballLocation.distance(from: locationManager.location!).rounded(FloatingPointRoundingRule.toNearestOrEven)/100000
-            print("distance = \(distance)")
-            textNode.scale = SCNVector3Make(Float(0.001*distance), Float(0.001*distance), Float(0.001*distance))
-            //textNode.scale = SCNVector3Make(Float(1), Float(1), Float(1))
+          
+          //  textNode.scale = SCNVector3Make(Float(0.001*distance), Float(0.001*distance), Float(0.001*distance))
+            textNode.scale = SCNVector3(ballNode.scale.x*(2/scale.x),ballNode.scale.y*(2/scale.x),0)
             textNode.simdRotation = (sceneView.pointOfView?.simdRotation)!
             sceneView.scene.rootNode.addChildNode(textNode)
             sceneView.scene.rootNode.addChildNode(ballNode)
@@ -194,6 +205,43 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             
             
         }
+    }
+    /*
+     Code Modifed from https://github.com/ProjectDent/ARKit-CoreLocation/blob/master/ARKit%2BCoreLocation/Source/SceneLocationView.swift
+     */
+    func getTranslation(assetLat: Float, assetLong:Float) -> SCNVector3{
+        let currentLocation = locationManager.location
+        let locationNodeLocation = CLLocation(latitude: CLLocationDegrees(assetLat), longitude: CLLocationDegrees(assetLong))
+        //Position is set to a position coordinated via the current position
+        let locationTranslation = currentLocation?.translation(toLocation: locationNodeLocation)
+        let distance = currentLocation?.distance(from: locationNodeLocation)
+        print("distance = \(distance)")
+        let adjustedDistance: CLLocationDistance
+        let scale = 1000 / Float(distance!)
+        
+        adjustedDistance = distance! * Double(scale)
+        
+        let adjustedTranslation = SCNVector3(
+            x: Float((locationTranslation?.longitudeTranslation)!) * scale,
+            y: 0,
+            z: Float((locationTranslation?.latitudeTranslation)!) * scale)
+        
+        let position = SCNVector3(
+            x:  adjustedTranslation.x,
+            y: 0,
+            z: adjustedTranslation.z)
+        
+        return position
+        
+    }
+    
+    func getScale(assetLat: Float, assetLong:Float) -> SCNVector3{
+        let currentLocation = locationManager.location
+        let locationNodeLocation = CLLocation(latitude: CLLocationDegrees(assetLat), longitude: CLLocationDegrees(assetLong))
+        let distance = currentLocation?.distance(from: locationNodeLocation)
+        let scale = 1000 / Float(distance!)
+        return SCNVector3(x: scale, y: scale, z: scale)
+        
     }
     
     

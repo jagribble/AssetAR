@@ -31,6 +31,7 @@
 		0691F71C1F8E33B10029D5A9 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0691F71B1F8E33B10029D5A9 /* Asset.swift */; };
 		0691F7211F8E70480029D5A9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0691F7201F8E70480029D5A9 /* CoreLocation.framework */; };
 		06D5A5B62020ACB900CBB3E4 /* AR Logo 180px.png in Resources */ = {isa = PBXBuildFile; fileRef = 06D5A5B52020ACB900CBB3E4 /* AR Logo 180px.png */; };
+		06D9BF322038F6DB00B0B9A5 /* LocationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D9BF312038F6DB00B0B9A5 /* LocationExtention.swift */; };
 		0E750BB5FC7677FBA07809E2 /* Pods_AssetAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5059ABA45D19E2B460100C98 /* Pods_AssetAR.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		0691F7201F8E70480029D5A9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0691F7221F8ED60C0029D5A9 /* pin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pin.jpg; path = art.scnassets/pin.jpg; sourceTree = "<group>"; };
 		06D5A5B52020ACB900CBB3E4 /* AR Logo 180px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AR Logo 180px.png"; path = "../../../Year3/Individual project/AR Logo 1.2/AR Logo 180px.png"; sourceTree = "<group>"; };
+		06D9BF312038F6DB00B0B9A5 /* LocationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationExtention.swift; sourceTree = "<group>"; };
 		1F26BFBE6A7559601E760D82 /* Pods-AssetAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-AssetAR/Pods-AssetAR.release.xcconfig"; sourceTree = "<group>"; };
 		30453D4DF9493AF965FA0083 /* Pods-AssetAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AssetAR/Pods-AssetAR.debug.xcconfig"; sourceTree = "<group>"; };
 		5059ABA45D19E2B460100C98 /* Pods_AssetAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				06388CD920155FDA00D03130 /* CreateAssetViewController.swift */,
 				06388CD5201544E900D03130 /* MapViewController.swift */,
 				067B81F72003B7A10002E49F /* UIViewControllerExtention.swift */,
+				06D9BF312038F6DB00B0B9A5 /* LocationExtention.swift */,
 				0691F71B1F8E33B10029D5A9 /* Asset.swift */,
 				06388CD720154A5000D03130 /* MapAnnotation.swift */,
 				0691F6EF1F8E1D700029D5A9 /* Main.storyboard */,
@@ -422,6 +425,7 @@
 				06388CD820154A5000D03130 /* MapAnnotation.swift in Sources */,
 				0687F9E21FFC26B90096A25B /* LoginViewController.swift in Sources */,
 				0631B6252017B663003FD3A9 /* AssetDetailViewController.swift in Sources */,
+				06D9BF322038F6DB00B0B9A5 /* LocationExtention.swift in Sources */,
 				0687F9E61FFC3BEE0096A25B /* SessionManager.swift in Sources */,
 				067B81FE200E216B0002E49F /* HomeViewController.swift in Sources */,
 				067B81F82003B7A10002E49F /* UIViewControllerExtention.swift in Sources */,
