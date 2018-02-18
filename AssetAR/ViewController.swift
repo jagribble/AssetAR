@@ -138,12 +138,13 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             print("Scale = \(scale.x)")
             let ballShape : SCNGeometry
             let text = SCNText(string: asset.assetName, extrusionDepth: 1.0)
+            //if the asset scale is high (close to location) then give it smaller radius
             if(scale.x > 10){
                 ballShape = SCNSphere(radius:1)
-                text.font = UIFont(name: "Helvatica", size: CGFloat(100/scale.x))
             } else if (scale.x > 1 && scale.x < 10){
                 ballShape = SCNSphere(radius: 10)
             } else{
+                // These assets are unlikely to show due to the radius of assets returned by API but if radius is set to high display assets according to their scale factor so they can be seen by the user
                 ballShape = SCNSphere(radius: CGFloat(10 / scale.x))
             }
 
@@ -192,7 +193,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             ballNode.addAnimation(spin, forKey: "spin around")
           //  let text = SCNText(string: asset.assetName, extrusionDepth: 1.0)
             let textNode = SCNNode(geometry: text)
-            textNode.position = SCNVector3Make(ballNode.position.x,-3.0,ballNode.position.z)
+            textNode.position = SCNVector3Make(ballNode.position.x,5.0,ballNode.position.z)
             let ballLocation = CLLocation(latitude: CLLocationDegrees(asset.assetLocationZ), longitude: CLLocationDegrees(asset.assetLocationX))
           
           //  textNode.scale = SCNVector3Make(Float(0.001*distance), Float(0.001*distance), Float(0.001*distance))
@@ -200,9 +201,6 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             textNode.simdRotation = (sceneView.pointOfView?.simdRotation)!
             sceneView.scene.rootNode.addChildNode(textNode)
             sceneView.scene.rootNode.addChildNode(ballNode)
-            
-            
-            
             
         }
     }
