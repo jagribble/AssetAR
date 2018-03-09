@@ -57,8 +57,8 @@ class CreateAssetViewController:UIViewController,CLLocationManagerDelegate{
                     group.leave()
                     return
                 }
-                let dictionaryData = ["name":"\(_assetName)","assetX":_lattitude,"assetY":_longitude,"orginizationID":1] as [String : Any]
-                print("{'name':'\(_assetName)','assetX':\(_lattitude),'assetY':\(_longitude),'orginizationID':1}")
+                let dictionaryData = ["name":"\(_assetName)","assetX":_lattitude,"assetY":_longitude,"orginizationID":SessionManager.shared.organisation!] as [String : Any]
+                print("{'name':'\(_assetName)','assetX':\(_lattitude),'assetY':\(_longitude),'orginizationID':\(SessionManager.shared.organisation!)}")
                 let headers = ["content-type": "application/json"]
                 var postData = NSData()
                 do{

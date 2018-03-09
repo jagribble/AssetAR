@@ -17,6 +17,7 @@ import MapKit
 class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var assetArray:[Asset] = []
+    var assetNodes:[SCNNode] = []
     var locValue:CLLocationCoordinate2D? = nil
     var objectSet = false
     @IBOutlet var sceneView: ARSCNView!
@@ -46,7 +47,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
                 return
             }
             print("Access Token \(credentials.accessToken ?? "NO access token tstored")")
-            let url = URL(string: "https://assetar-stg.herokuapp.com/api/assets")
+            let url = URL(string: "https://assetar-stg.herokuapp.com/api/\(SessionManager.shared.organisation!)/assets")
             var request = URLRequest(url: url!)
             // Configure your request here (method, body, etc)
             request.addValue("Bearer \(credentials.accessToken ?? "")", forHTTPHeaderField: "Authorization")
@@ -108,30 +109,29 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         
         if(CLLocationManager.locationServicesEnabled()){
             locationManager.delegate = self
+            locationManager.showsBackgroundLocationIndicator = true
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         } else{
             print("location manager disabled")
         }
         self.getAssets()
-//        let ballShape = SCNSphere(radius: 0.09)
-//        let material = SCNMaterial()
-//        material.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
-//        ballShape.materials = [material]
-//      //  guard let pin = SCNScene(named: "art.scnassets/test.dae") else {return}
-//
-//        let ballNode = SCNNode(geometry: ballShape)
-////        let ballNode = SCNNode()
-////        ballNode.addChildNode(pin.rootNode)
-////        ballNode.scale = SCNVector3Make(0.5,0.5,0.5)
-////        ballNode.position = SCNVector3Make(0,0, -1)
-//        sceneView.scene.rootNode.addChildNode(ballNode)
+        let ballShape = SCNSphere(radius: 0.09)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
+        ballShape.materials = [material]
+      //  guard let pin = SCNScene(named: "art.scnassets/test.dae") else {return}
+
+        let ballNode = SCNNode(geometry: ballShape)
+
+        ballNode.position = SCNVector3Make(0,0, -1)
+        sceneView.scene.rootNode.addChildNode(ballNode)
         //51.441431, -0.941817
     }
     
     func drawAssets(){
         for asset in assetArray{
-            
+            print("------------------")
             let scale = self.getScale(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
             print("AssetName = \(asset.assetName)")
 
@@ -153,36 +153,16 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             
             ballShape.materials = [material]
             let ballNode = SCNNode(geometry: ballShape)
-            let ballNodeX:Float
-            let ballNodeZ:Float
-            let location = locationManager.location?.coordinate
-            let scaleFactor:Float = 1000
+//            let ballNodeX:Float
+//            let ballNodeZ:Float
+//            let location = locationManager.location?.coordinate
+//            let scaleFactor:Float = 1000
             
-//            print("AssetName = \(asset.assetName)")
-//            print("user Long = (\(Float((location?.longitude)!)),\(Float((location?.latitude)!))")
-//            print("asset Long = (\(asset.assetLocationZ),\(asset.assetLocationX))")
-//            print("BallNodx = \(asset.assetLocationX) - \(location?.latitude) = \(((asset.assetLocationX)-(Float((location?.latitude)!) )))")
-//            print("BallNodeZ = \(location?.longitude) - \(asset.assetLocationZ) = \((Float((location?.longitude)!)-(asset.assetLocationZ)))")
-//            print("--------------------------------------")
-//            ballNodeX = ((asset.assetLocationX)-(Float((location?.latitude)!) ))//East/West
-//            ballNodeZ = (Float((location?.longitude)!)-(asset.assetLocationZ))//North/South
-//
-//            if ballNodeZ < minLat { minLat = ballNodeZ }
-//            if ballNodeZ > maxLat { maxLat = ballNodeZ }
-//            if ballNodeX < minLon { minLon = ballNodeX }
-//            if ballNodeX > maxLon { maxLon = ballNodeX }
-//             // ballNodeZ = ((asset.assetLocationZ)-(Float((location?.longitude)!))//North/South
-//            print("ballNodeX = \(ballNodeX*scaleFactor),    ballNodeZ = \(ballNodeZ*scaleFactor)")
-//            // If either (not both) values are negative keep same position otherwise take the negative positions (flip the axis)
-//            // This takes into acccount the four quadrants
-//            //TODO: LOOK AT THIS!!
-//            if((ballNodeZ < 0 && ballNodeX > 0) || (ballNodeX < 0 && ballNodeZ > 0)){
-//                ballNode.position = SCNVector3Make(ballNodeX*scaleFactor,0, ballNodeZ*scaleFactor)
-//            } else if((ballNodeZ > 0 && ballNodeX > 0) || (ballNodeZ < 0 && ballNodeX < 0)){
-//                ballNode.position = SCNVector3Make(-ballNodeX*scaleFactor,0, -ballNodeZ*scaleFactor)
-//            }
-            ballNode.position = self.getTranslation(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
+
+            ballNode.worldPosition = self.getTranslation(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
+            print("Postion X = \(ballNode.position.x)   postion Z = \(ballNode.position.z)")
             ballNode.scale = scale
+            ballNode.movabilityHint = SCNMovabilityHint.fixed
             let spin = CABasicAnimation(keyPath: "rotation")
             // Use from-to to explicitly make a full rotation around z
             spin.fromValue =  SCNVector4Make(0, 1, 0, 0)
@@ -194,14 +174,24 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
           //  let text = SCNText(string: asset.assetName, extrusionDepth: 1.0)
             let textNode = SCNNode(geometry: text)
             textNode.position = SCNVector3Make(ballNode.position.x,5.0,ballNode.position.z)
-            let ballLocation = CLLocation(latitude: CLLocationDegrees(asset.assetLocationZ), longitude: CLLocationDegrees(asset.assetLocationX))
+//            let ballLocation = CLLocation(latitude: CLLocationDegrees(asset.assetLocationZ), longitude: CLLocationDegrees(asset.assetLocationX))
           
-          //  textNode.scale = SCNVector3Make(Float(0.001*distance), Float(0.001*distance), Float(0.001*distance))
             textNode.scale = SCNVector3(ballNode.scale.x*(2/scale.x),ballNode.scale.y*(2/scale.x),0)
             textNode.simdRotation = (sceneView.pointOfView?.simdRotation)!
             sceneView.scene.rootNode.addChildNode(textNode)
             sceneView.scene.rootNode.addChildNode(ballNode)
+            assetNodes.append(ballNode)
             
+        }
+    }
+    
+    func updateNodes(){
+        for assetNode in assetNodes{
+            let asset = assetArray[assetNodes.index(of: assetNode)!]
+            let scale = self.getScale(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
+            assetNode.worldPosition = self.getTranslation(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
+            print("Postion X = \(assetNode.position.x)   postion Z = \(assetNode.position.z)")
+            assetNode.scale = scale
         }
     }
     /*
@@ -218,7 +208,8 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         let scale = 1000 / Float(distance!)
         
         adjustedDistance = distance! * Double(scale)
-        
+        print("x = \(locationTranslation?.longitudeTranslation)")
+        print("z = \(locationTranslation?.latitudeTranslation)")
         let adjustedTranslation = SCNVector3(
             x: Float((locationTranslation?.longitudeTranslation)!) * scale,
             y: 0,
@@ -250,7 +241,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         //detect planes and set the heading of the ARKit world to the heading of north
-       // configuration.planeDetection = .horizontal
+        configuration.planeDetection = .horizontal
         configuration.worldAlignment = .gravityAndHeading
        
         // Run the view's session
@@ -269,16 +260,24 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         // Release any cached data, images, etc that aren't in use.
     }
 
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+       print("Location manger update")
+        self.updateNodes()
+//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//
+//        self.map.setRegion(region, animated: true)
+    }
+    
     // MARK: - ARSCNViewDelegate
     
-/*
+
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
-     
+      //  self.updateNodes()
         return node
     }
-*/
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         let result = sceneView.hitTest(touch.location(in: sceneView), types: ARHitTestResult.ResultType.featurePoint)

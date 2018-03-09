@@ -29,6 +29,9 @@ class SessionManager{
     var challenge: String?
     var verifier: String?
     var accessToken: String?
+    var userID: String?
+    var organisation:String?
+    var organisationName:String?
     
     
     private init () {
@@ -59,27 +62,87 @@ class SessionManager{
         }
     }
     
-    func retrieveProfile() {
+    func retrieveProfile() -> Bool{
 //        guard let accessToken = self.keychain.string(forKey: "access_token") else {
 //            return //SessionManagerError.noAccessToken
 //        }
-        Auth0
-            .authentication()
-            .userInfo(withAccessToken: (self.credentials?.accessToken)!)
-            .start { result in
-                switch(result) {
-                case .success(let profile):
-                    print("Successfully found profile = \(profile.email ?? "No email")")
-                  
-                    self.userProfile = profile
-//return profile
-                case .failure(let error):
-                   print(error)
-                 //  return nil
-                }
+        var status = false
+        
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{
+            Auth0
+                .authentication()
+                .userInfo(withAccessToken: (self.credentials?.accessToken)!)
+                .start { result in
+                    switch(result) {
+                    case .success(let profile):
+                        
+                        print("Successfully found profile = \(profile.email ?? "No email")")
+                        
+                        self.userProfile = profile
+                        self.userID = profile.sub
+                        status = true
+                        group.leave()
+                    //return profile
+                    case .failure(let error):
+                        print(error)
+                        group.leave()
+                        //  return nil
+                    }
+            }
+            
         }
- 
+        group.wait()
+        return status
     }
+    
+    func getOrganization()->Bool{
+         var status = false
+        if(self.retrieveProfile()){
+            var status = false
+            let urlString = "https://assetar-stg.herokuapp.com/api/appuser/\(self.userID?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)! ?? "")"
+            let url = URL(string: urlString)
+            let group = DispatchGroup()
+            group.enter()
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{
+                var request = URLRequest(url: url!)
+                // Configure your request here (method, body, etc)
+                request.addValue("Bearer \(self.credentials?.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+                // print("Bearer \(self.credentials?.accessToken ?? "")")
+                let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                    guard let data = data else {
+                        group.leave()
+                        return
+                    }
+                    // when the repsonse is returned output response
+                    guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject] else {
+                        print("Can not convert data to JSON object")
+                        group.leave()
+                        return
+                    }
+                    print(json)
+                    let orgs = json!["rows"]! as! NSArray
+                    var i = 0
+                    while i<orgs.count{
+                        let instance = orgs[i] as! [String:AnyObject]
+                        self.organisation = instance["organizationid"] as? String
+                        print(self.organisation!)
+                        status = true
+                        i = i+1
+                    }
+                    group.leave()
+                })
+                task.resume()
+            }
+            group.wait()
+            return status
+        }else{
+            return status
+        }
+        
+        
+        }
     
     func login(userName:String,password:String) -> Bool{
         var status = false
@@ -100,7 +163,7 @@ class SessionManager{
                     // Auth0 will automatically dismiss the hosted login page
                     print("Credentials: \(credentials)")
                     print(credentials.accessToken ?? "no access token");
-                   
+                    self.credentials = credentials
                     self.credentialsManager.store(credentials: credentials)
                     status = true
                     group.leave()
@@ -119,6 +182,10 @@ class SessionManager{
         // Remove credentials from KeyChain
         self.keychain.clearAll()
         self.credentialsManager.clear()
+        self.userProfile = nil
+        self.credentials = Credentials.init()
+        self.organisation = nil
+        self.userID = ""
     }
     
     

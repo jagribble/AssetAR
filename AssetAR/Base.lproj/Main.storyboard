@@ -183,7 +183,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asset AR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d58-ew-xFs">
-                                <rect key="frame" x="16" y="92" width="343" height="37"/>
+                                <rect key="frame" x="16" y="82" width="343" height="37"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -236,30 +236,57 @@
                                     <action selector="displayList:" destination="93H-os-8s2" eventType="touchUpInside" id="gJm-DY-2kz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome XXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEa-rh-9By">
+                                <rect key="frame" x="16" y="141" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No organisation assigned" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOC-fK-WaW">
+                                <rect key="frame" x="16" y="156" width="343" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="c0o-C7-DVD" firstAttribute="top" secondItem="KAj-84-RRe" secondAttribute="bottom" constant="41" id="01Q-VJ-GhK"/>
-                            <constraint firstItem="d58-ew-xFs" firstAttribute="top" secondItem="Ecf-BM-jja" secondAttribute="top" constant="48" id="4aL-Lj-CqO"/>
                             <constraint firstItem="9Qg-tW-n0u" firstAttribute="top" secondItem="Ecf-BM-jja" secondAttribute="top" id="5tq-px-FNz"/>
-                            <constraint firstItem="5m6-CY-MI9" firstAttribute="leading" secondItem="d58-ew-xFs" secondAttribute="leading" id="B97-Mh-7f7"/>
-                            <constraint firstItem="5m6-CY-MI9" firstAttribute="trailing" secondItem="d58-ew-xFs" secondAttribute="trailing" id="C3H-Fs-aOf"/>
-                            <constraint firstItem="5m6-CY-MI9" firstAttribute="top" secondItem="d58-ew-xFs" secondAttribute="bottom" constant="66" id="ChK-Nu-YDM"/>
+                            <constraint firstItem="TEa-rh-9By" firstAttribute="top" secondItem="d58-ew-xFs" secondAttribute="bottom" constant="22" id="9yR-5n-YBT"/>
+                            <constraint firstItem="TEa-rh-9By" firstAttribute="leading" secondItem="5m6-CY-MI9" secondAttribute="leading" id="M9N-TC-woa"/>
                             <constraint firstItem="KAj-84-RRe" firstAttribute="leading" secondItem="c0o-C7-DVD" secondAttribute="leading" id="Mpf-cL-NbK"/>
+                            <constraint firstItem="TEa-rh-9By" firstAttribute="trailing" secondItem="yOC-fK-WaW" secondAttribute="trailing" id="Stw-k7-ieJ"/>
                             <constraint firstItem="dF2-u7-QW2" firstAttribute="trailing" secondItem="5m6-CY-MI9" secondAttribute="trailing" id="TjS-ro-cyK"/>
+                            <constraint firstItem="TEa-rh-9By" firstAttribute="trailing" secondItem="5m6-CY-MI9" secondAttribute="trailing" id="V2v-Ph-Y7A"/>
                             <constraint firstItem="KAj-84-RRe" firstAttribute="trailing" secondItem="c0o-C7-DVD" secondAttribute="trailing" id="WHQ-tw-mb0"/>
-                            <constraint firstItem="9Qg-tW-n0u" firstAttribute="trailing" secondItem="d58-ew-xFs" secondAttribute="trailing" id="Z5g-0H-4Fg"/>
+                            <constraint firstItem="TEa-rh-9By" firstAttribute="leading" secondItem="yOC-fK-WaW" secondAttribute="leading" id="XOu-V2-eyk"/>
+                            <constraint firstItem="yOC-fK-WaW" firstAttribute="top" secondItem="d58-ew-xFs" secondAttribute="bottom" constant="37" id="XSW-LC-O62"/>
                             <constraint firstItem="9Qg-tW-n0u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lXs-QM-nf9" secondAttribute="leading" constant="20" symbolic="YES" id="ZFx-HA-Why"/>
+                            <constraint firstItem="d58-ew-xFs" firstAttribute="top" secondItem="9Qg-tW-n0u" secondAttribute="bottom" constant="8" symbolic="YES" id="be9-2x-Btq"/>
                             <constraint firstItem="dF2-u7-QW2" firstAttribute="top" secondItem="5m6-CY-MI9" secondAttribute="bottom" constant="29" id="cO8-BK-2Nn"/>
                             <constraint firstItem="KAj-84-RRe" firstAttribute="trailing" secondItem="dF2-u7-QW2" secondAttribute="trailing" id="cXg-ct-oij"/>
+                            <constraint firstItem="5m6-CY-MI9" firstAttribute="top" secondItem="TEa-rh-9By" secondAttribute="bottom" constant="33" id="fAV-ah-bJx"/>
+                            <constraint firstItem="TEa-rh-9By" firstAttribute="leading" secondItem="d58-ew-xFs" secondAttribute="leading" id="kvq-7N-OAL"/>
+                            <constraint firstItem="d58-ew-xFs" firstAttribute="trailing" secondItem="lXs-QM-nf9" secondAttribute="trailingMargin" id="lC9-k3-XxF"/>
+                            <constraint firstItem="d58-ew-xFs" firstAttribute="trailing" secondItem="9Qg-tW-n0u" secondAttribute="trailing" id="lec-tO-J01"/>
+                            <constraint firstItem="d58-ew-xFs" firstAttribute="leading" secondItem="lXs-QM-nf9" secondAttribute="leadingMargin" id="ne1-Zp-o1l"/>
                             <constraint firstItem="KAj-84-RRe" firstAttribute="top" secondItem="dF2-u7-QW2" secondAttribute="bottom" constant="44" id="ogz-jS-hMQ"/>
-                            <constraint firstItem="d58-ew-xFs" firstAttribute="trailing" secondItem="lXs-QM-nf9" secondAttribute="trailingMargin" id="sTW-DR-fLk"/>
+                            <constraint firstItem="5m6-CY-MI9" firstAttribute="top" secondItem="yOC-fK-WaW" secondAttribute="bottom" constant="8" symbolic="YES" id="tBk-Br-9Ad"/>
+                            <constraint firstItem="TEa-rh-9By" firstAttribute="trailing" secondItem="d58-ew-xFs" secondAttribute="trailing" id="uo4-km-nqK"/>
                             <constraint firstItem="dF2-u7-QW2" firstAttribute="leading" secondItem="5m6-CY-MI9" secondAttribute="leading" id="vzs-zC-fyH"/>
-                            <constraint firstItem="d58-ew-xFs" firstAttribute="leading" secondItem="lXs-QM-nf9" secondAttribute="leadingMargin" id="wkY-1o-kgK"/>
                             <constraint firstItem="KAj-84-RRe" firstAttribute="leading" secondItem="dF2-u7-QW2" secondAttribute="leading" id="xNW-oB-3km"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ecf-BM-jja"/>
                     </view>
+                    <connections>
+                        <outlet property="addAssetButton" destination="KAj-84-RRe" id="RCx-PO-pMK"/>
+                        <outlet property="arButton" destination="5m6-CY-MI9" id="x2W-JX-COs"/>
+                        <outlet property="assetListButton" destination="c0o-C7-DVD" id="ep8-qy-xCf"/>
+                        <outlet property="mapButton" destination="dF2-u7-QW2" id="ShP-dH-jdc"/>
+                        <outlet property="message" destination="yOC-fK-WaW" id="hNt-ka-qq3"/>
+                        <outlet property="welcomeMessage" destination="TEa-rh-9By" id="ZJW-Ip-U74"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vGZ-N2-mnG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

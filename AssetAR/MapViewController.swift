@@ -41,7 +41,7 @@ class MapViewController:UIViewController,CLLocationManagerDelegate{
                 return
             }
             print("Access Token \(credentials.accessToken ?? "NO access token tstored")")
-            let url = URL(string: "https://assetar-stg.herokuapp.com/api/assets")
+            let url = URL(string: "https://assetar-stg.herokuapp.com/api/\(SessionManager.shared.organisation!)/assets")
             var request = URLRequest(url: url!)
             // Configure your request here (method, body, etc)
             request.addValue("Bearer \(credentials.accessToken ?? "")", forHTTPHeaderField: "Authorization")
