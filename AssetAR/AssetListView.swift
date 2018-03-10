@@ -50,6 +50,8 @@ class AssetListView:UIViewController,UITableViewDelegate, UITableViewDataSource{
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "AssetDetail") as? AssetDetailViewController {
             viewController.asset = assetArray[indexPath.row]
+          
+            viewController.orgText = APIAccess.access.getOrganisation(id: assetArray[indexPath.row].orgainsationID)
             //self.navigationController?.show(viewController, sender: self)
             self.present(viewController, animated: true, completion: nil)
         }

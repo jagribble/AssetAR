@@ -14,6 +14,7 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
     @IBOutlet var lattitude: UILabel!
     @IBOutlet var longitude: UILabel!
     @IBOutlet var organisation: UILabel!
+    var orgText:String?
     
     var asset:Asset? = nil
     
@@ -102,7 +103,7 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
             assetName?.text = asset?.assetName
             lattitude?.text = asset?.assetLocationX.description
             longitude?.text = asset?.assetLocationZ.description
-            organisation?.text = asset?.orgainsationID.description
+            organisation?.text = orgText!
         }
       
     }

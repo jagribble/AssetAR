@@ -35,6 +35,21 @@ extension UIViewController {
         return spinnerView
     }
     
+    class func displayWhiteBackgroundSpinner(onView : UIView) -> UIView {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 1)
+      
+        let ai = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        ai.transform = CGAffineTransform(scaleX: CGFloat(2), y: CGFloat(2))
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            onView.addSubview(spinnerView)
+        }
+        
+        return spinnerView
+    }
     class func removeSpinner(spinner :UIView) {
         DispatchQueue.main.async {
             spinner.removeFromSuperview()

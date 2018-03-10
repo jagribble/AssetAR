@@ -10,7 +10,7 @@ import UIKit
 
 class HomeViewController:UIViewController{
     var assetArray:[Asset] = []
-    
+    var spinner:UIView?
     @IBOutlet var welcomeMessage: UILabel!
     @IBOutlet var message: UILabel!
     @IBOutlet var arButton: UIButton!
@@ -108,33 +108,16 @@ class HomeViewController:UIViewController{
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print(SessionManager.shared.organisation)
-        //SessionManager.shared.retrieveProfile()
-//        if(SessionManager.shared.getOrganization()){
-//            let alert = UIAlertController(title: "Success", message: "Orgaisation \(SessionManager.shared.organisation!)", preferredStyle: UIAlertControllerStyle.alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//
-//        }
-////        if(true){
-//            let alert = UIAlertController(title: "Success", message: "Orgaisation \(SessionManager.shared.organisation!)", preferredStyle: UIAlertControllerStyle.alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-////
-//        }
-       // SessionManager.shared.retrieveProfile()
-        
+    override func viewDidAppear(_ animated: Bool) {
         if (SessionManager.shared.organisation == nil){
             
-            if(SessionManager.shared.getOrganization()){
+            if(SessionManager.shared.getOrganisation()){
+                UIViewController.removeSpinner(spinner: spinner!)
                 welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
                 message.isHidden = true
-                let alert = UIAlertController(title: "Success", message: "Orgaisation \(SessionManager.shared.organisation!)", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+               
             } else{
+                UIViewController.removeSpinner(spinner: spinner!)
                 let alert = UIAlertController(title: "Error", message: "Can not get orgaisation! Please ask admin to assign you to an orgaisation", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -146,10 +129,14 @@ class HomeViewController:UIViewController{
                 assetListButton.isEnabled = false;
             }
         } else{
-             welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
+            welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
             message.isHidden = true
         }
-        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        spinner = UIViewController.displayWhiteBackgroundSpinner(onView: self.view)
         self.hideKeyboardWhenTappedAround()
     }
     

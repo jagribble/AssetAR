@@ -6,7 +6,51 @@
 ////  Copyright © 2018 Gribble. All rights reserved.
 //// DO NOT NEED THIS FILE OLD OAuth 2 flow
 //
-//import Foundation
+import Foundation
+
+class APIAccess{
+    static let access: APIAccess = APIAccess()
+
+func getOrganisation(id: Int)->String{
+    var orgName = ""
+    let urlString = "https://assetar-stg.herokuapp.com/api/organisation/\(id)"
+    let url = URL(string: urlString)
+    let group = DispatchGroup()
+    group.enter()
+    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{
+        var request = URLRequest(url: url!)
+        // Configure your request here (method, body, etc)
+        request.addValue("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+        // print("Bearer \(self.credentials?.accessToken ?? "")")
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            guard let data = data else {
+                group.leave()
+                return
+            }
+            // when the repsonse is returned output response
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject] else {
+                print("Can not convert data to JSON object")
+                group.leave()
+                return
+            }
+            print(json)
+            let orgs = json!["rows"]! as! NSArray
+            var i = 0
+            while i<orgs.count{
+                let instance = orgs[i] as! [String:AnyObject]
+                orgName = (instance["name"] as? String)!
+             
+                i = i+1
+            }
+            group.leave()
+        })
+        task.resume()
+    }
+    group.wait()
+    return orgName
+}
+
+}
 //import CommonCrypto
 //import Auth0
 //

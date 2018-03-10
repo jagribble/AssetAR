@@ -37,7 +37,7 @@
 ## Week 6 
 - Ajusted databse to match data model
 - Endpoints changed to match ReSTful paradigm
-- Assets related to Organization making it multi-tenant
+- Assets related to Organisation making it multi-tenant
 ### To do next week
 - finish off endpoints
 - Design UI

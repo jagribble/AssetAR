@@ -93,7 +93,7 @@ class LoginViewController:UIViewController{
     }
     
     @IBAction func login(_ sender: Any) {
-       
+        UIViewController.displaySpinner(onView: self.view)
         loginCustom()
 
    }
@@ -103,6 +103,7 @@ class LoginViewController:UIViewController{
 
     override func viewDidAppear(_ animated: Bool) {
         if(self.biometrics()){
+            
             self.goHome()
         }
     }

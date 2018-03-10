@@ -97,7 +97,7 @@ class SessionManager{
         return status
     }
     
-    func getOrganization()->Bool{
+    func getOrganisation()->Bool{
          var status = false
         if(self.retrieveProfile()){
             var status = false
@@ -140,8 +140,6 @@ class SessionManager{
         }else{
             return status
         }
-        
-        
         }
     
     func login(userName:String,password:String) -> Bool{
