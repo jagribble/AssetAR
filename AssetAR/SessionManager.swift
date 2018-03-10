@@ -131,7 +131,9 @@ class SessionManager{
                         status = true
                         i = i+1
                     }
-                    group.leave()
+                   
+                        group.leave()
+
                 })
                 task.resume()
             }

@@ -112,9 +112,11 @@ class HomeViewController:UIViewController{
         if (SessionManager.shared.organisation == nil){
             
             if(SessionManager.shared.getOrganisation()){
+                 let orgName = APIAccess.access.getOrganisation(id: Int(SessionManager.shared.organisation!)!)
                 UIViewController.removeSpinner(spinner: spinner!)
                 welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
-                message.isHidden = true
+                message.text = "Organisation: \(orgName)"
+                
                
             } else{
                 UIViewController.removeSpinner(spinner: spinner!)
@@ -136,7 +138,13 @@ class HomeViewController:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinner = UIViewController.displayWhiteBackgroundSpinner(onView: self.view)
+        if(SessionManager.shared.organisation == nil){
+            spinner = UIViewController.displayWhiteBackgroundSpinner(onView: self.view)
+        } else{
+            welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
+            message.isHidden = true
+        }
+      
         self.hideKeyboardWhenTappedAround()
     }
     
