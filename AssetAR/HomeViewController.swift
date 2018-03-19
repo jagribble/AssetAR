@@ -113,6 +113,7 @@ class HomeViewController:UIViewController{
             
             if(SessionManager.shared.getOrganisation()){
                  let orgName = APIAccess.access.getOrganisation(id: Int(SessionManager.shared.organisation!)!)
+                SessionManager.shared.organisationName = orgName
                 UIViewController.removeSpinner(spinner: spinner!)
                 welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
                 message.text = "Organisation: \(orgName)"
@@ -132,7 +133,7 @@ class HomeViewController:UIViewController{
             }
         } else{
             welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
-            message.isHidden = true
+            message.text = "Organisation: \(SessionManager.shared.organisationName!)"
         }
     }
     
