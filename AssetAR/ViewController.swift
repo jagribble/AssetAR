@@ -46,7 +46,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
                 // Route user back to Login Screen
                 return
             }
-            print("Access Token \(credentials.accessToken ?? "NO access token tstored")")
+            print("Access Token \(credentials.accessToken ?? "NO access token stored")")
             let url = URL(string: "https://assetar-stg.herokuapp.com/api/\(SessionManager.shared.organisation!)/assets")
             var request = URLRequest(url: url!)
             // Configure your request here (method, body, etc)
@@ -126,6 +126,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
 
         ballNode.position = SCNVector3Make(0,0, -1)
         sceneView.scene.rootNode.addChildNode(ballNode)
+        
         //51.441431, -0.941817
     }
     
@@ -236,7 +237,8 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
+        sceneView.addGestureRecognizer(tap)
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
@@ -246,6 +248,17 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
        
         // Run the view's session
         sceneView.session.run(configuration)
+    }
+    
+    @objc func handleTap(rec: UITapGestureRecognizer){
+        if rec.state == .ended {
+            let location: CGPoint = rec.location(in: sceneView)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if !hits.isEmpty{
+                let tappedNode = hits.first?.node
+                print("Number of nodes tapped = \(hits.count)")
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -279,12 +292,12 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {return}
-        let result = sceneView.hitTest(touch.location(in: sceneView), types: ARHitTestResult.ResultType.featurePoint)
-//        // get the last result as that will be most accurate
-        guard let hitResult = result.last else {return}
-        let hitTransform =  hitResult.worldTransform
-        
+       
+//        let result = sceneView.hitTest(touch.location(in: sceneView), types: ARHitTestResult.ResultType.featurePoint)
+////        // get the last result as that will be most accurate
+//        guard let hitResult = result.last else {return}
+//        let hitTransform =  hitResult.worldTransform
+//
 //        let hitVector = SCNVector3Make(hitTransform.columns.3.x, hitTransform.columns.3.y, hitTransform.columns.3.z)
 //        
 //        createBall(position: hitVector)
