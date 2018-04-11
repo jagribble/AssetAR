@@ -21,7 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     var locValue:CLLocationCoordinate2D? = nil
     var objectSet = false
     @IBOutlet var sceneView: ARSCNView!
-    
+    @IBAction func unwindToAR(segue: UIStoryboardSegue) {}
     @IBAction func back(_ sender: Any) {
         print("Go back")
         self.goHome()
@@ -75,13 +75,13 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
                 var i = 0
                 while i<assets.count{
                     let instance = assets[i] as! [String:AnyObject]
-                     let asset = Asset(id: instance["assetid"] as! Int ,name: instance["assetname"] as! String, x: instance["assetx"] as! Float , z: instance["assety"] as! Float,oId: instance["orginizationid"] as! Int)
+                     let asset = Asset(id: instance["assetid"] as! Int ,name: instance["assetname"] as! String, x: instance["assetx"]?.floatValue as! Float , z: instance["assety"]?.floatValue as! Float,oId: instance["orginizationid"] as! Int)
                     self.assetArray.append(asset)
                     i = i+1
                 }
                 self.drawAssets()
                 let asset = assets[0] as! [String:AnyObject]
-                print(asset["assetid"])
+                print(asset["assetid"]!)
             })
             task.resume()
         }
@@ -256,7 +256,16 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             let hits = self.sceneView.hitTest(location, options: nil)
             if !hits.isEmpty{
                 let tappedNode = hits.first?.node
-                print("Number of nodes tapped = \(hits.count)")
+                let assetIndex = assetNodes.index(of: tappedNode!)
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "AssetDetail") as? AssetDetailViewController {
+                    viewController.asset = assetArray[assetIndex!]
+                    viewController.fromAR = true
+                    viewController.orgText = APIAccess.access.getOrganisation(id: assetArray[assetIndex!].orgainsationID)
+                    //self.navigationController?.show(viewController, sender: self)
+                    self.present(viewController, animated: true, completion: nil)
+                }
+                //print("\(assetArray[assetIndex!].assetName)")
             }
         }
     }

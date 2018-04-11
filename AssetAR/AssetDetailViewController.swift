@@ -15,12 +15,19 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
     @IBOutlet var longitude: UILabel!
     @IBOutlet var organisation: UILabel!
     var orgText:String?
-    
+    var fromAR:Bool = false
     var asset:Asset? = nil
     
     @IBAction func back(_ sender: Any) {
-        //self.navigationController?.popViewController(animated: true)
-        self.performSegue(withIdentifier: "goBackToList", sender: self)
+        //
+        if(fromAR){
+        
+            self.performSegue(withIdentifier: "goBackToAR", sender: self)
+        } else{
+            self.performSegue(withIdentifier: "goBackToList", sender: self)
+        }
+        
+        
     }
     
     @IBAction func deleteAsset(_ sender: Any) {
