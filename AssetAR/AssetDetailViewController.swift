@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import Charts
 
-class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
+class AssetDetailViewController:UIViewController,UINavigationControllerDelegate,ChartViewDelegate
+{
     
     @IBOutlet var assetName: UILabel!
     @IBOutlet var lattitude: UILabel!
     @IBOutlet var longitude: UILabel!
     @IBOutlet var organisation: UILabel!
+    @IBOutlet var lineChart: LineChartView!
+    
+    
     var orgText:String?
     var fromAR:Bool = false
     var asset:Asset? = nil
@@ -103,17 +108,72 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
         return status
     }
     
+    func makeChart(){
+        var chartValues:[ChartDataEntry] = []
+        for dataPoint in self.dataPoints{
+            chartValues.append(ChartDataEntry(x: dataPoint.timestamp.timeIntervalSince1970 * 1000.0, y: Double(dataPoint.data)!))
+        }
+        let set1 = LineChartDataSet(values: chartValues, label: "\(asset?.assetName ?? "")")
+        set1.drawIconsEnabled = false
+        
+//        set1.lineDashLengths = [5, 2.5]
+        set1.highlightLineDashLengths = [5, 2.5]
+        set1.setColor(.black)
+        set1.setCircleColor(.black)
+        set1.lineWidth = 1
+        set1.circleRadius = 3
+        set1.drawCircleHoleEnabled = false
+        set1.valueFont = .systemFont(ofSize: 9)
+        set1.formLineDashLengths = [5, 2.5]
+        set1.formLineWidth = 1
+        set1.formSize = 15
+        
+        let gradientColors = [ChartColorTemplates.colorFromString("#00ff0000").cgColor,
+                              ChartColorTemplates.colorFromString("#ffff0000").cgColor]
+        let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
+        
+        set1.fillAlpha = 1
+        set1.fill = Fill(linearGradient: gradient, angle: 90) //.linearGradient(gradient, angle: 90)
+        set1.drawFilledEnabled = true
+        
+        let data = LineChartData(dataSet: set1)
+        lineChart.data = data
+        lineChart.reloadInputViews()
+        lineChart.animate(xAxisDuration: 2.5)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         self.navigationController?.delegate = self
+        self.lineChart.delegate = self
         if(asset != nil){
             assetName?.text = asset?.assetName
             lattitude?.text = asset?.assetLocationX.description
             longitude?.text = asset?.assetLocationZ.description
             organisation?.text = orgText!
             self.dataPoints = APIAccess.access.getAssetData(id: (asset?.id)!)
+            lineChart.xAxis.valueFormatter = DateValueFormatter()
+         //   lineChart.zoomToCenter(scaleX: 10, scaleY: 10)
+            if(self.dataPoints.count>0){
+                self.makeChart()
+            }
+           
         }
       
     }
 }
+
+private class DateValueFormatter: NSObject, IAxisValueFormatter {
+    private let dateFormatter = DateFormatter()
+    
+    override init() {
+        super.init()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
+}
+

@@ -76,10 +76,12 @@ func getOrganisation(id: Int)->String{
                 print(json)
                 let points = json!["rows"]! as! NSArray
                 var i = 0
-                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
                 while i<points.count{
                     let instance = points[i] as! [String:AnyObject]
-                    let timestamp:String = instance["timestamp"]! as! String
+                    let timeString = instance["timestamp"]! as! String
+                    let timestamp:Date = dateFormatter.date(from: timeString)!
                     let data:String =  instance["data"] as! String
                     let datatypeid:String = String(instance["datatypeid"] as! Int)
                     print(data)

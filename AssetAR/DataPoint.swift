@@ -9,11 +9,11 @@
 import Foundation
 
 class DataPoint {
-    var timestamp:String
+    var timestamp:Date
     var data:String
     var dataTypeID:String
     
-    init(t:String,d:String,dTID:String){
+    init(t:Date,d:String,dTID:String){
         self.timestamp = t
         self.data = d
         self.dataTypeID = dTID
