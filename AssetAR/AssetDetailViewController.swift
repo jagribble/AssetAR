@@ -17,6 +17,7 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
     var orgText:String?
     var fromAR:Bool = false
     var asset:Asset? = nil
+    var dataPoints:[DataPoint] = []
     
     @IBAction func back(_ sender: Any) {
         //
@@ -111,6 +112,7 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate{
             lattitude?.text = asset?.assetLocationX.description
             longitude?.text = asset?.assetLocationZ.description
             organisation?.text = orgText!
+            self.dataPoints = APIAccess.access.getAssetData(id: (asset?.id)!)
         }
       
     }

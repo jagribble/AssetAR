@@ -50,6 +50,55 @@ func getOrganisation(id: Int)->String{
     return orgName
 }
 
+    func getAssetData(id:Int)->[DataPoint]{
+        var dataPoints:[DataPoint] = []
+        var orgName = ""
+        let urlString = "https://assetar-stg.herokuapp.com/api/asset/\(id)/datapoints"
+        let url = URL(string: urlString)
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{
+            var request = URLRequest(url: url!)
+            // Configure your request here (method, body, etc)
+            request.addValue("Bearer \(SessionManager.shared.credentials?.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+            // print("Bearer \(self.credentials?.accessToken ?? "")")
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                guard let data = data else {
+                    group.leave()
+                    return
+                }
+                // when the repsonse is returned output response
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject] else {
+                    print("Can not convert data to JSON object")
+                    group.leave()
+                    return
+                }
+                print(json)
+                let points = json!["rows"]! as! NSArray
+                var i = 0
+                
+                while i<points.count{
+                    let instance = points[i] as! [String:AnyObject]
+                    let timestamp:String = instance["timestamp"]! as! String
+                    let data:String =  instance["data"] as! String
+                    let datatypeid:String = String(instance["datatypeid"] as! Int)
+                    print(data)
+                    let dataPoint = DataPoint(t: timestamp , d: data, dTID: datatypeid )
+                    dataPoints.append(dataPoint)
+//                    orgName = (instance["name"] as? String)!
+                    print(instance)
+                    i = i+1
+                }
+                group.leave()
+            })
+            task.resume()
+        }
+        group.wait()
+        return dataPoints
+    }
+    
+    
+    
 }
 //import CommonCrypto
 //import Auth0
