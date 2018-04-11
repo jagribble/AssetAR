@@ -91,7 +91,7 @@ class HomeViewController:UIViewController{
                     var i = 0
                     while i<assets.count{
                         let instance = assets[i] as! [String:AnyObject]
-                        let asset = Asset(id: instance["assetid"] as! Int ,name: instance["assetname"] as! String, x: instance["assetx"] as! Float , z: instance["assety"] as! Float,oId: instance["orginizationid"] as! Int) 
+                        let asset = Asset(id: instance["assetid"] as! Int ,name: instance["assetname"] as! String, x: instance["assetx"]?.floatValue as! Float , z: instance["assety"]?.floatValue as! Float,oId: instance["orginizationid"] as! Int)
                         self.assetArray.append(asset)
                         i = i+1
                     }
@@ -114,6 +114,7 @@ class HomeViewController:UIViewController{
             if(SessionManager.shared.getOrganisation()){
                  let orgName = APIAccess.access.getOrganisation(id: Int(SessionManager.shared.organisation!)!)
                 SessionManager.shared.organisationName = orgName
+                    print(SessionManager.shared.organisationName)
                 UIViewController.removeSpinner(spinner: spinner!)
                 welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
                 message.text = "Organisation: \(orgName)"
@@ -132,6 +133,7 @@ class HomeViewController:UIViewController{
                 assetListButton.isEnabled = false;
             }
         } else{
+            print(SessionManager.shared.organisationName)
             welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
             message.text = "Organisation: \(SessionManager.shared.organisationName!)"
         }
@@ -143,7 +145,6 @@ class HomeViewController:UIViewController{
             spinner = UIViewController.displayWhiteBackgroundSpinner(onView: self.view)
         } else{
             welcomeMessage.text = "Welcome, \(SessionManager.shared.userProfile!.name!)"
-            message.isHidden = true
         }
       
         self.hideKeyboardWhenTappedAround()
