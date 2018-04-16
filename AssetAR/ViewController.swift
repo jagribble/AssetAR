@@ -20,8 +20,11 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     var assetNodes:[SCNNode] = []
     var locValue:CLLocationCoordinate2D? = nil
     var objectSet = false
+    let configuration = ARWorldTrackingConfiguration()
     @IBOutlet var sceneView: ARSCNView!
-    @IBAction func unwindToAR(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToAR(segue: UIStoryboardSegue) {
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
     @IBAction func back(_ sender: Any) {
         print("Go back")
         self.goHome()
@@ -241,7 +244,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         sceneView.addGestureRecognizer(tap)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+       
         //detect planes and set the heading of the ARKit world to the heading of north
         configuration.planeDetection = .horizontal
         configuration.worldAlignment = .gravityAndHeading
@@ -335,5 +338,8 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    //view.reloadInputViews()
+        
+      //  viewDidLoad()
     }
 }
