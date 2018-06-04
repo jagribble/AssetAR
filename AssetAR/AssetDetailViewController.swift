@@ -27,7 +27,6 @@ class AssetDetailViewController:UIViewController,UINavigationControllerDelegate,
     @IBAction func back(_ sender: Any) {
         //
         if(fromAR){
-        
             self.performSegue(withIdentifier: "goBackToAR", sender: self)
         } else{
             self.performSegue(withIdentifier: "goBackToList", sender: self)

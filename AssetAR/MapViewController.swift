@@ -90,7 +90,7 @@ class MapViewController:UIViewController,CLLocationManagerDelegate{
             let distance = location.distance(from: locationManager.location!).rounded(FloatingPointRoundingRule.toNearestOrEven)
             let mapAnnotation = MapAnnotation(t: asset.assetName, s: distance.description, cord: coordinate)
             annotaions.append(mapAnnotation)
-            print("asset = \(asset.assetName), \(mapAnnotation)")
+           
         }
         self.mapView.addAnnotations(annotaions)
        

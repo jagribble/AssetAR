@@ -146,7 +146,7 @@ class SessionManager{
     
     func login(userName:String,password:String) -> Bool{
         var status = false
-        
+    
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async{
@@ -157,7 +157,7 @@ class SessionManager{
                     print("Error: \(error)")
                     status = false
                     group.leave()
-                   
+                
                 case .success(let credentials):
                     // Do something with credentials e.g.: save them.
                     // Auth0 will automatically dismiss the hosted login page

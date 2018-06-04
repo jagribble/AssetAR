@@ -116,7 +116,6 @@ class LoginViewController:UIViewController{
         if(error != nil){
             return false
         }
-      //  UIApplication.shared.is
         // need to return false if face/touch ID is turned off
         let group = DispatchGroup()
         group.enter()
@@ -126,12 +125,12 @@ class LoginViewController:UIViewController{
                     print("Not logged in")
                     status = false
                     group.leave()
-                    // self.loginCustom()
+                  
                 } else {
                     status = true
                     print("Already Logged in")
                     group.leave()
-                   // self.goHome()
+                  
                 }
             }
         }

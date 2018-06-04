@@ -157,10 +157,6 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
             
             ballShape.materials = [material]
             let ballNode = SCNNode(geometry: ballShape)
-//            let ballNodeX:Float
-//            let ballNodeZ:Float
-//            let location = locationManager.location?.coordinate
-//            let scaleFactor:Float = 1000
             
 
             ballNode.worldPosition = self.getTranslation(assetLat: asset.assetLocationX, assetLong: asset.assetLocationZ)
@@ -207,13 +203,12 @@ class ViewController: UIViewController, ARSCNViewDelegate,CLLocationManagerDeleg
         //Position is set to a position coordinated via the current position
         let locationTranslation = currentLocation?.translation(toLocation: locationNodeLocation)
         let distance = currentLocation?.distance(from: locationNodeLocation)
-        print("distance = \(distance)")
+      
         let adjustedDistance: CLLocationDistance
         let scale = 1000 / Float(distance!)
         
         adjustedDistance = distance! * Double(scale)
-        print("x = \(locationTranslation?.longitudeTranslation)")
-        print("z = \(locationTranslation?.latitudeTranslation)")
+     
         let adjustedTranslation = SCNVector3(
             x: Float((locationTranslation?.longitudeTranslation)!) * scale,
             y: 0,

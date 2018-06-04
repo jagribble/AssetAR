@@ -13,10 +13,8 @@ class AssetListView:UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet var tableView: UITableView!
     var assetArray: [Asset] = []
-  //  @IBOutlet var tableView: UITableView!
     
     func numberOvarctionsInTableView(tableView: UITableView!) -> Int {
-        //        return Business.count
         return 1
     }
 
@@ -29,10 +27,7 @@ class AssetListView:UIViewController,UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AssetTableViewCell
         let asset = assetArray[indexPath.row]
         // Configure the cell...
-        print("asset = \(asset.assetName)")
         cell.assetName.text = asset.assetName
-//        cell.photoImageView.image = meal.photo
-//        cell.ratingControl.rating = meal.rating
         return cell
     }
     // function to get back to listView
