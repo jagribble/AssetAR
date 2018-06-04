@@ -64,6 +64,31 @@
 ### To do next week
 - fix Auth flow
 
-
 ## Week 10
 - `Error: Grant type 'http://auth0.com/oauth/grant-type/password-realm' not allowed for the client.` Error fixed via allowing grant type on client 'password' to allow password realm
+
+### To do next week
+- Admin dashboard
+
+## Week 11
+- Created React adminstration dashboard homepage
+- Google API Key aquired
+- npm package not working as expected for google maps
+
+### To do next week
+- Fix Google maps
+- Asset Detail page
+
+## Week 12
+- Used 'google-maps-react' to implement google maps 
+- Created asset detail page (based off home page)
+- react-charts-js-2 used to add a chart to show the data
+
+### To do next week
+- User page
+- Users to have organisation in the iOS App
+
+## Week 13
+- Created users page allowing admin to assign user to organisation
+- iOS app has context of organisation
+- If no organisation user locked from actions
